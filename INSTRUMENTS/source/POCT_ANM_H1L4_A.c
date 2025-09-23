@@ -1316,7 +1316,7 @@ void Extraction_Clean2(SMsg * pMsg)
 	
 	Valve_Rotation(WASHING_4, CCW);
 	
-	PumpMixControl(2,35000,0,2000);
+	PumpMixControl(4,35000,0,2000);
 /*****************************************************************/
 	Valve_Rotation(WASHING_3, CW);
 
