@@ -1,0 +1,7 @@
+{
+    "svn.ignoreMissingSvnWarning": true,
+    "files.associations": {
+        "usart.h": "c",
+        "instrumentinclude.h": "c"
+    }
+}
