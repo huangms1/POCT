@@ -1,14 +1,14 @@
 /**
   ******************************************************************************
   * @file    bsp_pid_conf.c
-  * @author  »ÆÃ÷ËÍ
+  * @author  é»„æ˜Žé€
   * @version V1.0
   * @date    2021-11-16
-  * @brief   POCT£¬À©ÔöÎÂ¶È¿ØÖÆ¡£
+  * @brief   POCTï¼Œæ‰©å¢žæ¸©åº¦æŽ§åˆ¶ã€‚
   ******************************************************************************
   * @attention
   *
-  * ÔËÐÐÆ½Ì¨:Õé»ÝÒ½ÁÆ·Ö×ÓÕï¶ÏÒÇÆ÷¡£
+  * è¿è¡Œå¹³å°:è‡»æƒ åŒ»ç–—åˆ†å­è¯Šæ–­ä»ªå™¨ã€‚
   *
   ******************************************************************************
   */ 
@@ -21,92 +21,147 @@
 	
 #include "FreeRTOS.h"
   
-//PIDTypedef PID[5];
+PIDTypedef PID[3];
   
 void PID_Init(void)
 {
 	assign_struct();
+//#define CH0_KP  5
+//#define CH0_KI  1
+//#define CH0_KD  0.01
+//	
+//	PID[0].Kp = CH0_KP;
+//	PID[0].Ki = CH0_KI;
+//	PID[0].Kd = CH0_KD;
+//	
+//	PID[1].Kp = 20;
+//	PID[1].Ki = 18;
+//	PID[1].Kd = 6;
+//	
+//	PID[2].Kp = 20;
+//	PID[2].Ki = 18;
+//	PID[2].Kd = 6;
 }
 
 void PID_Calculate(float setTemp,uint8_t ch)
 { 	
 	float currentTemp = (float)GetTemp(ch)/100.0f;
+	FUZZYPID *pid = &FPID_data[ch];
 	
-	COOL_Fuzzytrans(&FPID_data[ch],setTemp,currentTemp);
+	COOL_Fuzzytrans(pid,setTemp,currentTemp);
+//	PID[ch].err = setTemp - currentTemp;
+	
+//	if(PID[ch].err >= 35.0f)
+//	{
+//		FPID_data[ch].pwm = 999;
+//		
+//	}
 
-	if(FPID_data[ch].iError >= 35.0f)
+//	else if((PID[ch].err < 35)&&(PID[ch].err >= 18))
+//	{
+//		FPID_data[ch].pwm = 400;
+//	}
+//	
+//	else if((PID[ch].err >= 4) && (PID[ch].err < 18))
+//	{
+//		FPID_data[ch].pwm = 150;
+//	}
+//	
+//	else if(PID[ch].err < 0)
+//	{		
+//		FPID_data[ch].pwm = 0;
+//	}
+		
+	if(pid->iError >= 35.0f)
 	{
-		FPID_data[ch].pwm = 999;
+		pid->pwm = 999;
 	}
 
-	else if((FPID_data[ch].iError < 35)&&(FPID_data[ch].iError >= 18))
+	else if((pid->iError < 35)&&(pid->iError >= 18))
 	{
-		FPID_data[ch].pwm = 600;
+		pid->pwm = 500;
 	}
 	
-	else if((FPID_data[ch].iError >= 4) && (FPID_data[ch].iError < 18))
+	else if((pid->iError >= 4) && (pid->iError < 18))
 	{
-		FPID_data[ch].pwm = 300;
-		if(ch == 0)
-		{
-			FPID_data[ch].pwm = 200;
-		}
+		pid->pwm = 200;
 	}
 	
-	else if(FPID_data[ch].iError < -0.2f)
+	else if(pid->iError < -0.1)
 	{
-		FPID_data[ch].pwm = 0;
+//		FAN_RUN(0);
+		pid->pwm = 0;
 	}
 			
 	else      
 	{		
-		FPID_data[ch].pwm += FPID_data[ch].data_kp*(FPID_data[ch].iError - FPID_data[ch].lasterror) + \
-		FPID_data[ch].data_ki*FPID_data[ch].iError + \
-		FPID_data[ch].data_kd*(FPID_data[ch].iError - 2*FPID_data[ch].lasterror + FPID_data[ch].preerror);
-
+//		FPID_data[ch].pwm += FPID_data[ch].data_kp*(FPID_data[ch].iError - FPID_data[ch].lasterror) + \
+//		FPID_data[ch].data_ki*FPID_data[ch].iError + \
+//		FPID_data[ch].data_kd*(FPID_data[ch].iError - 2*FPID_data[ch].lasterror + FPID_data[ch].preerror);
+		
+//		FPID_data[ch].pwm += PID[ch].Kp*(PID[ch].err - PID[ch].next_err) + PID[ch].Ki*PID[ch].err + PID[ch].Kd*(PID[ch].err - 2*PID[ch].next_err + PID[ch].last_err);
+		float _kp = pid->kp + pid->data_kp;
+		float _ki = pid->ki + pid->data_ki;
+		float _kd = pid->kd + pid->data_kd;
+		
+		float integral = _ki * (pid->iError + pid->lasterror) / 2; // æ¢¯å½¢ç§¯åˆ†		
+		float dError = pid->iError - pid->lasterror;		
+		pid->pwm += _kp*pid->iError + integral + _kd*dError;		
+		
 		if(ch == 1)
 		{
-			if(FPID_data[ch].pwm >= 80) //60
-				FPID_data[ch].pwm = 80;
-			else if(FPID_data[ch].pwm <= 35)
-				FPID_data[ch].pwm = 35;	
+			if(pid->pwm >= 130)    //60
+				pid->pwm = 130;
+			else if(pid->pwm <= 20)
+				pid->pwm = 20;	
 		}
 		else if(ch == 0)
 		{
-			if(FPID_data[ch].pwm >= 80) //40
-				FPID_data[ch].pwm = 80;
-			else if(FPID_data[ch].pwm <= 20)
-				FPID_data[ch].pwm = 20;	
+			if(pid->pwm >= 120) //40
+				pid->pwm = 120;
+			else if(pid->pwm <= 20)
+				pid->pwm = 20;	
 		}
 		else
 		{
-			if(FPID_data[ch].pwm >= 120) //80
-				FPID_data[ch].pwm = 120;
-			else if(FPID_data[ch].pwm <= 25)
-				FPID_data[ch].pwm = 25;
+			if(pid->pwm >= 120) //80
+				pid->pwm = 120;
+			else if(pid->pwm <= 30)
+				pid->pwm = 30;
 		}
 	}
 		
 	if(ch == 0)
 	{		
-		TIM_SetTIMCompare(TIM8,FPID_data[ch].pwm,2);
+		TIM_SetTIMCompare(TIM8,pid->pwm,2);
 	}
 	else if(ch == 1)
 	{
-		TIM_SetTIMCompare(TIM8,FPID_data[ch].pwm,3);
+		TIM_SetTIMCompare(TIM8,pid->pwm,3);
 	}
 	else if(ch == 2)
 	{
-		TIM_SetTIMCompare(TIM9,FPID_data[ch].pwm,0);
+		TIM_SetTIMCompare(TIM9,pid->pwm,0);
 	}
 	else if(ch == 3)
 	{
-		TIM_SetTIMCompare(TIM8,FPID_data[ch].pwm,0);
+		TIM_SetTIMCompare(TIM8,pid->pwm,0);
 	} 		
 	else if (ch == 4)
 	{
-		TIM_SetTIMCompare(TIM9,FPID_data[ch].pwm,1);
+		TIM_SetTIMCompare(TIM9,pid->pwm,1);
 	} 
+	
+//	if(PID[ch].err < -0.5) {
+//		FAN_RUN(0);
+//	}else{
+//		FAN_RUN(1);
+//	}
+	
+	
+//	PID[ch].last_err = PID[ch].next_err;
+
+//	PID[ch].next_err = PID[ch].err;
 }
 		 
 HAL_StatusTypeDef PID_Stop(uint8_t ch)
@@ -165,6 +220,6 @@ HAL_StatusTypeDef PID_Stop(uint8_t ch)
 	return state;
 }
 
-//½áÊø
+//ç»“æŸ
 
 

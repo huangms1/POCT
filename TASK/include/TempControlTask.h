@@ -8,7 +8,7 @@
 
 
 //任务优先级
-#define TEMP_CONTROL_TASK_PRIO		6
+#define TEMP_CONTROL_TASK_PRIO		2
 //任务堆栈大小	
 #define TEMP_CONTROL_STK_SIZE 		512  
 //任务句柄

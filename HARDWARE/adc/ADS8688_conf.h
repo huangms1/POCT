@@ -150,6 +150,8 @@ uint16_t Get_MAN_CH_Mode_Data(void);//读取手动模式AD值
 
 void Get_AUTO_RST_Mode_Data(uint16_t* outputdata, uint8_t chnum);//读取自动扫描模式AD值
 
+//void ADS8688_init(void);
+
 
 #endif
 

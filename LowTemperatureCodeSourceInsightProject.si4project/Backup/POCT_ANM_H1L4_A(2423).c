@@ -1350,7 +1350,7 @@ void Motor_Move(SMsg * pMsg,uint16_t Rstfre,uint8_t motor_num,uint8_t dir,GPIO_T
 	
 	pSpeed = (SpeedCalc_TypeDef *)pvPortMalloc(sizeof(SpeedCalc_TypeDef) + 1);
 	
-	step = PARA_Get_num(pMsg->m_pAppMsg->m_pAppLayerSubPara);
+	step = ExtractNumberAfterEqualSign(pMsg->m_pAppMsg->m_pAppLayerSubPara);
 		
 	fre = Motor_Fre(step);
 	

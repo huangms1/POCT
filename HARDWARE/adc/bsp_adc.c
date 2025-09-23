@@ -4,15 +4,14 @@
 #include "poct_process.h"
 #include "ADS8688_conf.h"
 
-__IO uint16_t ADC_ConvertedValue[PT100_NOFCHANEL]={0};
+//__IO uint16_t ADC_ConvertedValue[PT100_NOFCHANEL]={0};
 
-DMA_HandleTypeDef DMA_Init_Handle;
+//DMA_HandleTypeDef DMA_Init_Handle;
 
-ADC_HandleTypeDef ADC_Handle;
+//ADC_HandleTypeDef ADC_Handle;
 
-ADC_ChannelConfTypeDef ADC_Config;
+//ADC_ChannelConfTypeDef ADC_Config;
 
-uint16_t GetMedianNum(uint8_t ch,uint8_t len);
 
 //static void PT100_ADC_GPIO_Config(void)
 //{
@@ -163,163 +162,227 @@ void PT100_Init(void)
 }
 
 //交换两个元素
-void swap(int *a,int *b)
-{
-	int temp = *a;
-	*a = *b;
-	*b = temp;
-}
+#define SWAP(a, b) do { int temp = (a); (a) = (b); (b) = temp; } while (0)
 
-int partition(int arr[],int low,int high)
-{
-	int pivot = arr[high];
-	
-	int i = (low - 1),j = 0;
-	
-	for(j = low;j<=high-1;j++){
-		if(arr[j]<pivot){
-			i++;
-			swap(&arr[i],&arr[j]);
-		}
-	}
-	swap(&arr[i+1],&arr[high]);
-	return(i+1);
-}
+/**
+ * @brief 交换两个整数的值
+ * @param a 第一个整数的指针
+ * @param b 第二个整数的指针
+ */
+// 原 swap 函数可以注释掉，用宏替换
+// void swap(int *a, int *b)
+// {
+//     int temp = *a;
+//     *a = *b;
+//     *b = temp;
+// }
 
-// 快速排序函数
-void quickSort(int arr[], int low, int high) {
-    if (low < high) {
-        int pi = partition(arr, low, high);
+/**
+ * @brief 对数组进行分区操作，用于快速排序
+ * @param arr 待分区的数组
+ * @param low 分区的起始索引
+ * @param high 分区的结束索引
+ * @return 分区点的索引
+ */
+int partition(int arr[], int low, int high) {
+    // 选择最后一个元素作为基准
+    int pivot = arr[high];
+    // i 用于记录小于基准的元素的位置
+    int i = low - 1,j = 0;
 
-        quickSort(arr, low, pi - 1);
-        quickSort(arr, pi + 1, high);
+    // 遍历数组，将小于基准的元素交换到左边
+    for (j = low; j <= high - 1; j++) {
+        if (arr[j] < pivot) {
+            i++;
+            SWAP(arr[i], arr[j]);
+        }
     }
+    // 将基准元素放到正确的位置
+    SWAP(arr[i + 1], arr[high]);
+    return i + 1;
 }
 
 /**
-*@brief		
-*@param		len: 
-*@return	
-*/
-uint16_t GetMedianNum(uint8_t ch,uint8_t len)
-{
-	int i;
-	
-	uint32_t  tmp = 0;
-
-	uint16_t  bTemp = 0;
-	
-//	int arr[10] = {0};
-
-    for(i = 0;i<len;i++)
-	{	
-		if(ch == 0)
-		{
-			MAN_CH_Mode(MAN_CH_0);
-			tmp += Get_MAN_CH_Mode_Data();
-//			arr[i] = Get_MAN_CH_Mode_Data();
-		}
-		else if(ch == 1)
-		{
-			MAN_CH_Mode(MAN_CH_1);
-			tmp += Get_MAN_CH_Mode_Data();
-//			arr[i] = Get_MAN_CH_Mode_Data();
-		}
-		else if(ch == 2)
-		{
-			MAN_CH_Mode(MAN_CH_2);
-			tmp += Get_MAN_CH_Mode_Data();
-//			arr[i] = Get_MAN_CH_Mode_Data();
-		}
-	}
-	bTemp = tmp/len;
-	
-//	quickSort(arr, 0, len-1);
-//	
-//	for(i = 1;i<len-1;i++)
-//	{
-//		sum += arr[i];
-//	}	
-//	bTemp = sum/8;
-	
-	return bTemp;
+ * @brief 对数组进行快速排序
+ * @param arr 待排序的数组
+ * @param low 排序的起始索引
+ * @param high 排序的结束索引
+ */
+void quickSort(int arr[], int low, int high) {
+	int pi = 0;
+    // 检查索引的合法性
+    if (low < 0 || high < 0 || low >= high) {
+        return;
+    }
+    // 进行分区操作
+    pi = partition(arr, low, high);
+    // 检查索引的合法性
+    if (low < 0 || high < 0 || low >= high) {
+        return;
+    }
+    // 进行分区操作
+    pi = partition(arr, low, high);
+    // 递归排序基准左边的元素
+    quickSort(arr, low, pi - 1);
+    // 递归排序基准右边的元素
+    quickSort(arr, pi + 1, high);
 }
 
-/***********************************************
-*@brief		获取温度
-*@param		ch : ͨ通道号。
-*@return	温度值
-************************************************/
-int GetTemp(uint8_t ch)
-{	
-	float upt100 = 0 ,rpt100 = 0;
-	
-	uint16_t bTemp = 0;
+/**
+ * @brief 获取指定通道的ADC平均值
+ * @param ch 通道号 (0, 1, 2, 7)
+ * @param len 采样次数
+ * @return ADC平均值
+ */
+uint16_t GetAverageADCValue(uint8_t ch, uint8_t len) {
+    // 参数验证
+    if (len == 0) {
+        return 0;  // 避免除以零
+    }
 
-	int Temp = 0;
+    // 检查通道是否有效
+    if (ch != 0 && ch != 1 && ch != 2 && ch != 7) {
+        return 0;  // 无效通道返回0
+    }
+
+    uint32_t sum = 0;  // 采样总和
+    uint16_t averageValue = 0;  // 平均值
+
+    // 采样len次
+    for (int i = 0; i < len; i++) {
+        // 根据通道选择对应的模式
+        switch (ch) {
+            case 0:
+                MAN_CH_Mode(MAN_CH_0);
+                break;
+            case 1:
+                MAN_CH_Mode(MAN_CH_1);
+                break;
+            case 2:
+                MAN_CH_Mode(MAN_CH_2);
+                break;
+            case 7:
+                MAN_CH_Mode(MAN_CH_7);
+                break;
+            default:
+                // 已经在参数验证中处理过无效通道
+                break;
+        }
+
+        // 获取数据并累加到总和
+        sum += Get_MAN_CH_Mode_Data();
+    }
+
+    // 计算平均值
+    averageValue = sum / len;
+
+    return averageValue;
+}
+
+///**
+// * @brief 获取指定通道的中位数数值
+// * @param ch 通道号
+// * @param len 采样次数
+// * @return 计算得到的中位数数值
+// */
+//uint16_t GetMedianNum(uint8_t ch, uint8_t len) {
+//    int i;
+//	
+//	uint32_t  tmp = 0;
+
+//	uint16_t  bTemp = 0;
+//	
+////	int arr[10] = {0};
+
+//    for(i = 0;i<len;i++)
+//	{	
+//		if(ch == 0)
+//		{
+//			MAN_CH_Mode(MAN_CH_0);
+//			tmp += Get_MAN_CH_Mode_Data();
+////			arr[i] = Get_MAN_CH_Mode_Data();
+//		}
+//		else if(ch == 1)
+//		{
+//			MAN_CH_Mode(MAN_CH_1);
+//			tmp += Get_MAN_CH_Mode_Data();
+////			arr[i] = Get_MAN_CH_Mode_Data();
+//		}
+//		else if(ch == 2)
+//		{
+//			MAN_CH_Mode(MAN_CH_2);
+//			tmp += Get_MAN_CH_Mode_Data();
+////			arr[i] = Get_MAN_CH_Mode_Data();
+//		}
+//		else if (ch == 7)
+//		{
+//			MAN_CH_Mode(MAN_CH_7);
+//			tmp += Get_MAN_CH_Mode_Data();
+//		}
+//	}
+//	bTemp = tmp/len;
+//	
+////	quickSort(arr, 0, len-1);
+////	
+////	for(i = 1;i<len-1;i++)
+////	{
+////		sum += arr[i];
+////	}	
+////	bTemp = sum/8;
+//	
+//	return bTemp;
+//}
+
+int applyTemperatureCompensation(int temp, uint16_t positive, uint16_t negative, uint16_t limit) {
+    if (positive > negative) {
+        if (positive <= limit) {
+            temp -= (int)(positive - negative);
+        }
+    } else {
+        if (negative <= limit) {
+            temp += (int)(negative - positive);
+        }
+    }
+    return temp;
+}
+
+/**
+ * @brief 获取指定通道的温度值
+ * @param ch 通道号
+ * @return 温度值
+ **/
+int GetTemp(uint8_t ch) {
 	
-	bTemp = GetMedianNum(ch,10);	
+	uint16_t adcValue = GetAverageADCValue(ch,10);	
+
+	float voltage = (((float)adcValue / 65535.0f) * 3750.0f) / 11.0f + 526.316f;   
 	
-	//温度计算  
-	upt100 = (((float)bTemp / 65535) * 3750) / 11 + 526.316f;   
+	float rpt100 = voltage * 470.0f * 1.0f / (3000.0f * 1.0f - voltage);       
 	
-	rpt100 = upt100 * 470 * 1.0f / (3000 * 1.0f - upt100);       
-	
-	Temp = (int)(((rpt100 - 100) / 0.3844495f)*100);
-	
-	if(ch == 4)
-		Temp = Temp;
+	int temp = (int)(((rpt100 - 100) / 0.3844495f)*100);
 	
 	switch(ch)
 	{
 		case 0:
-			
-			if(Globle.POCT_Par.T1_Compensate_Pesitive > Globle.POCT_Par.T1_Compensate_Negative)
-			{
-				if(Globle.POCT_Par.T1_Compensate_Pesitive <= 2000)
-					Temp = Temp - (int)(Globle.POCT_Par.T1_Compensate_Pesitive-Globle.POCT_Par.T1_Compensate_Negative);
-			}
-			else
-			{
-				if(Globle.POCT_Par.T1_Compensate_Negative <= 2000)
-					Temp = Temp + (int)(Globle.POCT_Par.T1_Compensate_Negative - Globle.POCT_Par.T1_Compensate_Pesitive);	
-			}
-		break;
-			
+        {
+			temp = applyTemperatureCompensation(temp, Globle.POCT_Par.T1_Compensate_Pesitive, Globle.POCT_Par.T1_Compensate_Negative, 5000);
+            break;
+        }
 		case 1:
-
-			if(Globle.POCT_Par.T2_Compensate_Pesitive > Globle.POCT_Par.T2_Compensate_Negative)
-			{
-				if(Globle.POCT_Par.T2_Compensate_Pesitive <= 2000)
-					Temp = Temp - (int)(Globle.POCT_Par.T2_Compensate_Pesitive-Globle.POCT_Par.T2_Compensate_Negative);
-			}
-			else
-			{
-				if(Globle.POCT_Par.T2_Compensate_Negative <= 2000)
-					Temp = Temp + (int)(Globle.POCT_Par.T2_Compensate_Negative + Globle.POCT_Par.T2_Compensate_Pesitive);		
-			}
-			
-		break;
-		
+        {
+			temp = applyTemperatureCompensation(temp, Globle.POCT_Par.T2_Compensate_Pesitive, Globle.POCT_Par.T2_Compensate_Negative, 2000);
+            break;
+        }
 		case 2:
-
-			if(Globle.POCT_Par.T3_Compensate_Pesitive > Globle.POCT_Par.T3_Compensate_Negative)
-			{
-				if(Globle.POCT_Par.T3_Compensate_Pesitive <= 2000)
-					Temp = Temp - (int)(Globle.POCT_Par.T3_Compensate_Pesitive - Globle.POCT_Par.T3_Compensate_Negative);
-			}
-			else
-			{
-				if(Globle.POCT_Par.T3_Compensate_Negative <= 2000)
-					Temp = Temp + (int)(Globle.POCT_Par.T3_Compensate_Negative + Globle.POCT_Par.T3_Compensate_Pesitive);		
-			}
+        {
+			temp = applyTemperatureCompensation(temp, Globle.POCT_Par.T3_Compensate_Pesitive, Globle.POCT_Par.T3_Compensate_Negative, 2000);
+            break;
+        }
 			
-		break;
-		
 		default :break;
 			
 	}
-	return Temp;
+	return temp;
 }
 
 

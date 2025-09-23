@@ -19,11 +19,11 @@ void NormalExeTask(void *pData)
 	
 		vTaskDelay(5);
 		
-		/*按键开关门*/
-		if(KEY_Scan() == 1)
-		{
-			Door_Control(DoorState.Door_sta);
-		}
+		// /*按键开关门*/
+		// if(KEY_Scan() == 1)
+		// {
+		// 	Door_Control(DoorState.Door_sta);
+		// }
 	};
 	
 }

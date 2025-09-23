@@ -8,9 +8,9 @@
 
 
 //任务优先级
-#define NORMAL_EXE_TASK_PRIO		1
+#define NORMAL_EXE_TASK_PRIO		3
 //任务堆栈大小	
-#define NORMAL_EXE_STK_SIZE 		256  
+#define NORMAL_EXE_STK_SIZE 		2048  
 //任务句柄
 extern TaskHandle_t NormalExeTask_Handler;
 

@@ -5,7 +5,7 @@
 #include "task.h"
 
 
-#define VIBRATE_TASK_STK_SIZE  		128
+#define VIBRATE_TASK_STK_SIZE  		256
 
 #define VIBRATE_TASK_PRIO           3
 

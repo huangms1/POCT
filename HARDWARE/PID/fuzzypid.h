@@ -14,10 +14,10 @@
 
 #define NB   -6
 #define NM	 -4
-#define NS	 -2   //-1
+#define NS	 -2   
 #define ZO	 0
 #define ZE	 0
-#define PS	 2    //1
+#define PS	 2    
 #define PM	 4
 #define PB	 6
 
@@ -25,7 +25,7 @@
 
 
 #if 1
-//è§„åˆ™åº“
+//¹æÔò¿â
 static const float ruleKp[7][7]={
 	PB,	PB,	PM,	PM,	PS,	PS,	ZO,
 	PB,	PB,	PM,	PM,	PS,	ZO,	ZO,
@@ -89,31 +89,31 @@ static const float ruleKd[7][7]={
     PS,	PS,	PM,	PB,	PB,	PB,	PB
 };
 #endif
-/*å®šä¹‰ç»“æ„ä½“å’Œå…¬ç”¨ä½“*/
+/*¶¨Òå½á¹¹ÌåºÍ¹«ÓÃÌå*/
 typedef struct
 {
-  float setpoint;               /*è®¾å®šå€¼*/
-  float kp;                     /*æ¯”ä¾‹ç³»æ•°*/
-  float ki;                     /*ç§¯åˆ†ç³»æ•°*/
-  float kd;                     /*å¾®åˆ†ç³»æ•°*/
-  float	iError;                 /*å‰ä¸€æ‹åå·®*/
-  float lasterror;              /*å‰ä¸€æ‹åå·®*/
-  float preerror;               /*å‰ä¸¤æ‹åå·®*/
-  float deadband;               /*æ­»åŒº*/
-  float output;                 /*è¾“å‡ºå€¼*/
-  float result;                 /*ç‰©ç†é‡è¾“å‡ºå€¼*/
-  float maximum;                /*è¾“å‡ºå€¼çš„ä¸Šé™(å…¥ï¼Ÿ)*/ 
-  float minimum;                /*è¾“å‡ºå€¼çš„ä¸‹é™*/
+  float setpoint;               /*Éè¶¨Öµ*/
+  float kp;                     /*±ÈÀıÏµÊı*/
+  float ki;                     /*»ı·ÖÏµÊı*/
+  float kd;                     /*Î¢·ÖÏµÊı*/
+  float	iError;                 /*Ç°Ò»ÅÄÆ«²î*/
+  float lasterror;              /*Ç°Ò»ÅÄÆ«²î*/
+  float preerror;               /*Ç°Á½ÅÄÆ«²î*/
+  float deadband;               /*ËÀÇø*/
+  float output;                 /*Êä³öÖµ*/
+  float result;                 /*ÎïÀíÁ¿Êä³öÖµ*/
+  float maximum;                /*Êä³öÖµµÄÉÏÏŞ(Èë£¿)*/ 
+  float minimum;                /*Êä³öÖµµÄÏÂÏŞ*/
  
-  float maxdKp;                 /*Kpå¢é‡çš„æœ€å¤§é™å€¼*/
-  float mindKp;                 /*Kpå¢é‡çš„æœ€å°é™å€¼*/
-  float qKp;                    /*Kpå¢é‡çš„å½±å“ç³»æ•°*/
-  float maxdKi;                 /*Kiå¢é‡çš„æœ€å¤§é™å€¼*/
-  float mindKi;                 /*Kiå¢é‡çš„æœ€å°é™å€¼*/
-  float qKi;                    /*Kiå¢é‡çš„å½±å“ç³»æ•°*/
-  float maxdKd;                 /*Kdå¢é‡çš„æœ€å¤§é™å€¼*/
-  float mindKd;                 /*Kdå¢é‡çš„æœ€å°é™å€¼*/
-  float qKd;                    /*Kdå¢é‡çš„å½±å“ç³»æ•°*/
+  float maxdKp;                 /*KpÔöÁ¿µÄ×î´óÏŞÖµ*/
+  float mindKp;                 /*KpÔöÁ¿µÄ×îĞ¡ÏŞÖµ*/
+  float qKp;                    /*KpÔöÁ¿µÄÓ°ÏìÏµÊı*/
+  float maxdKi;                 /*KiÔöÁ¿µÄ×î´óÏŞÖµ*/
+  float mindKi;                 /*KiÔöÁ¿µÄ×îĞ¡ÏŞÖµ*/
+  float qKi;                    /*KiÔöÁ¿µÄÓ°ÏìÏµÊı*/
+  float maxdKd;                 /*KdÔöÁ¿µÄ×î´óÏŞÖµ*/
+  float mindKd;                 /*KdÔöÁ¿µÄ×îĞ¡ÏŞÖµ*/
+  float qKd;                    /*KdÔöÁ¿µÄÓ°ÏìÏµÊı*/
   
   float data_kp;
   float data_ki;
@@ -122,23 +122,23 @@ typedef struct
   int pwm;
 }FUZZYPID;
 
-//åˆå§‹åŒ–ç»“æ„ä½“å‚æ•°
+//³õÊ¼»¯½á¹¹Ìå²ÎÊı
 extern FUZZYPID FPID;
 
 extern FUZZYPID FPID_data[MAX_CHN];
 
 int assign_struct(void);
 
-//éš¶å±åº¦è®¡ç®—å‡½æ•°
+//Á¥Êô¶È¼ÆËãº¯Êı
 void CalcMembership(float *ms,float qv,int * index);
 
-//è¾“å…¥å€¼çš„é‡åŒ–è®ºåŸŸ(-6->6)
+//ÊäÈëÖµµÄÁ¿»¯ÂÛÓò(-6->6)
  void LinearQuantization(FUZZYPID *vPID,float pv,float *qValue);
 
-//è§£æ¨¡ç³Š
+//½âÄ£ºı
  void FuzzyComputation (FUZZYPID *vPID,float _Real_Value);
 
-/*ç¨‹åºå…¥å£ä¸»å‡½æ•°*/
+/*³ÌĞòÈë¿ÚÖ÷º¯Êı*/
 float COOL_Fuzzytrans(FUZZYPID *vPID,float _Set_Vaule,float _Measure_Vaule) ;
 
 float PID_Vout(short vSet, short vin);

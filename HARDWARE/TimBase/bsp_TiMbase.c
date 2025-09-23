@@ -4,13 +4,13 @@
   * @author  fire
   * @version V1.0
   * @date    2013-xx-xx
-  * @brief   TIM2 1ms ¶¨Ê±Ó¦ÓÃbsp
+  * @brief   TIM2 1ms å®šæ—¶åº”ç”¨bsp
   ******************************************************************************
   * @attention
   *
-  * ÊµÑéÆ½Ì¨:Ò°»ğ ISO-MINI STM32 ¿ª·¢°å 
-  * ÂÛÌ³    :http://www.firebbs.cn
-  * ÌÔ±¦    :https://fire-stm32.taobao.com
+  * å®éªŒå¹³å°:é‡ç« ISO-MINI STM32 å¼€å‘æ¿ 
+  * è®ºå›    :http://www.firebbs.cn
+  * æ·˜å®    :https://fire-stm32.taobao.com
   *
   ******************************************************************************
   */ 
@@ -18,24 +18,24 @@
 #include "bsp_TiMbase.h" 
 #include "w5500_conf.h"
 
-TIM_HandleTypeDef TIM5_Handler;	//TIM5¾ä±ú 	
+TIM_HandleTypeDef TIM5_Handler;	//TIM5å¥æŸ„ 	
 
 
 /**
-*@brief		³õÊ¼»¯ÍøÂç¶¨Ê±Æ÷TIM5
-*@param		ÎŞ
-*@return	ÎŞ
+*@brief		åˆå§‹åŒ–ç½‘ç»œå®šæ—¶å™¨TIM5
+*@param		æ— 
+*@return	æ— 
 */
 
 void TIM5_Init(uint16_t arr,uint16_t psc)
 {  
-    TIM5_Handler.Instance = TIM5;                          //Í¨ÓÃ¶¨Ê±Æ÷3
-    TIM5_Handler.Init.Prescaler=psc;                     //·ÖÆµÏµÊı
-    TIM5_Handler.Init.CounterMode=TIM_COUNTERMODE_UP;    //ÏòÉÏ¼ÆÊıÆ÷
-    TIM5_Handler.Init.Period=arr;                        //×Ô¶¯×°ÔØÖµ
-    TIM5_Handler.Init.ClockDivision=TIM_CLOCKDIVISION_DIV1;//Ê±ÖÓ·ÖÆµÒò×Ó
+    TIM5_Handler.Instance = TIM5;                          //é€šç”¨å®šæ—¶å™¨3
+    TIM5_Handler.Init.Prescaler=psc;                     //åˆ†é¢‘ç³»æ•°
+    TIM5_Handler.Init.CounterMode=TIM_COUNTERMODE_UP;    //å‘ä¸Šè®¡æ•°å™¨
+    TIM5_Handler.Init.Period=arr;                        //è‡ªåŠ¨è£…è½½å€¼
+    TIM5_Handler.Init.ClockDivision=TIM_CLOCKDIVISION_DIV1;//æ—¶é’Ÿåˆ†é¢‘å› å­
     HAL_TIM_Base_Init(&TIM5_Handler);    
-    HAL_TIM_Base_Start_IT(&TIM5_Handler); //Ê¹ÄÜ¶¨Ê±Æ÷3ºÍ¶¨Ê±Æ÷3¸üĞÂÖĞ¶Ï£ºTIM_IT_UPDATE   
+    HAL_TIM_Base_Start_IT(&TIM5_Handler); //ä½¿èƒ½å®šæ—¶å™¨3å’Œå®šæ—¶å™¨3æ›´æ–°ä¸­æ–­ï¼šTIM_IT_UPDATE   
 }
 
 
@@ -57,7 +57,7 @@ void  BASIC_TIM_IRQHandler (void)
 //{
 //    if(htim==(&TIM5_Handler))
 //    {
-////      LED1_TOGGLE;  //ºìµÆÖÜÆÚÉÁË¸
+////      LED1_TOGGLE;  //çº¢ç¯å‘¨æœŸé—ªçƒ
 //    }
 //}
 

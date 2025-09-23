@@ -22,39 +22,39 @@
 
 DHCP_Get DHCP_GET;
 
-uint8*   SRC_MAC_ADDR   = EXTERN_DHCP_MAC;				/*本地MAC地址*/
+uint8*   SRC_MAC_ADDR   = EXTERN_DHCP_MAC;				    /*本地MAC地址*/
 uint8*   GET_SN_MASK    = EXTERN_DHCP_SN;					/*从DHCP服务器获取到的子网掩码*/
 uint8*   GET_GW_IP      = EXTERN_DHCP_GW;					/*从DHCP服务器获取到的网关地址*/
-uint8*   GET_DNS_IP     = EXTERN_DHCP_DNS;				/*从DHCP服务器获取到的DNS服务器地址*/
-uint8*   DHCP_HOST_NAME = EXTERN_DHCP_NAME;   		/*主机名*/
-uint8*   GET_SIP        = EXTERN_DHCP_SIP;				/*从DHCP服务器获取到的本机IP*/
-uint8    DHCP_SIP[4] = {0,};											/*已发现的DNS服务器地址*/
-uint8    DHCP_REAL_SIP[4] = {0,}; 								/*从DHCP列表中选择使用的DHCP服务器*/
-uint8    OLD_SIP[4];        											/*最初获取到的IP地址*/
+uint8*   GET_DNS_IP     = EXTERN_DHCP_DNS;				    /*从DHCP服务器获取到的DNS服务器地址*/
+uint8*   DHCP_HOST_NAME = EXTERN_DHCP_NAME;   		        /*主机名*/
+uint8*   GET_SIP        = EXTERN_DHCP_SIP;				    /*从DHCP服务器获取到的本机IP*/
+uint8    DHCP_SIP[4] = {0,};								/*已发现的DNS服务器地址*/
+uint8    DHCP_REAL_SIP[4] = {0,}; 							/*从DHCP列表中选择使用的DHCP服务器*/
+uint8    OLD_SIP[4];        								/*最初获取到的IP地址*/
 
-uint8		dhcp_state       = STATE_DHCP_READY;       /*DHCP客户端状态*/
-uint8		dhcp_retry_count = 0;                      /*DHCP重试次数*/
-uint8		DHCP_timeout     = 0;                      /*DHCP超时标志位*/
-uint32  dhcp_lease_time;													 /*租约时间*/
-uint32	next_dhcp_time  = 0;											/*DHCP超时时间*/
+uint8		dhcp_state       = STATE_DHCP_READY;            /*DHCP客户端状态*/
+uint8		dhcp_retry_count = 0;                           /*DHCP重试次数*/
+uint8		DHCP_timeout     = 0;                           /*DHCP超时标志位*/
+uint32  dhcp_lease_time;									/*租约时间*/
+uint32	next_dhcp_time  = 0;								/*DHCP超时时间*/
 uint32	dhcp_tick_cnt   = 0;                   	  
 uint8		DHCP_timer;
 
 uint8 Conflict_flag = 0;
 uint32  DHCP_XID        = DEFAULT_XID;				
 uint8 EXTERN_DHCPBUF[1024];
-RIP_MSG*  pRIPMSG = (RIP_MSG*)EXTERN_DHCPBUF;			/*DHCP消息指针*/
+RIP_MSG*  pRIPMSG = (RIP_MSG*)EXTERN_DHCPBUF;			   /*DHCP消息指针*/
 
 
-void  send_DHCP_DISCOVER(void);										/*向DHCP服务器发送发现报文*/
-void  send_DHCP_REQUEST(void);										/*向DHCP服务器发送请求报文*/
-void  send_DHCP_RELEASE_DECLINE(char msgtype);		/*向DHCP服务器发送释放报文*/
+void  send_DHCP_DISCOVER(void);							   /*向DHCP服务器发送发现报文*/
+void  send_DHCP_REQUEST(void);							   /*向DHCP服务器发送请求报文*/
+void  send_DHCP_RELEASE_DECLINE(char msgtype);		       /*向DHCP服务器发送释放报文*/
 
-void  reset_DHCP_time(void);        							/*初始化DHCP计时器*/
-void  DHCP_timer_handler(void);     							/*DHCP计时器*/
-void  check_DHCP_Timeout(void);     							/*检查是否超时*/
-uint8 check_leasedIP(void);												/*检查获取的IP是否冲突*/
-uint8 parseDHCPMSG(uint16 length);								/*从DHCP服务器接收消息并解析*/
+void  reset_DHCP_time(void);        					   /*初始化DHCP计时器*/
+void  DHCP_timer_handler(void);     					   /*DHCP计时器*/
+void  check_DHCP_Timeout(void);     					   /*检查是否超时*/
+uint8 check_leasedIP(void);								   /*检查获取的IP是否冲突*/
+uint8 parseDHCPMSG(uint16 length);						   /*从DHCP服务器接收消息并解析*/
 
 /**
 *@brief		DHCP定时初始化
@@ -503,18 +503,18 @@ uint8 parseDHCPMSG(uint16 length)
 */
 uint8 check_DHCP_state(SOCKET s) 
 {
-	uint16 len;   																			/*定义一个表示接收数据大小变量*/
-	uint8  type;																				/*定义一个表示接收封包类型变量*/
+	uint16 len;   		/*定义一个表示接收数据大小变量*/
+	uint8  type;		/*定义一个表示接收封包类型变量*/
 	
 	type = 0;
-	if(getSn_SR(s)!=SOCK_CLOSED)                        /*socket处于打开状态*/
+	if(getSn_SR(s)!=SOCK_CLOSED)                     /*socket处于打开状态*/
 	{
-		if ((len = getSn_RX_RSR(s)) > 0)									/*接收到数据*/
+		if ((len = getSn_RX_RSR(s)) > 0)			 /*接收到数据*/
 		{
-			type = parseDHCPMSG(len);												/*解析收到的封包类型*/
+			type = parseDHCPMSG(len);				 /*解析收到的封包类型*/
 		}
 	}
-	else																								/*socket处于关闭状态，重新初始化socket*/
+	else											 /*socket处于关闭状态，重新初始化socket*/
 	{
 		if(dhcp_state == STATE_DHCP_READY)
 		{
@@ -528,36 +528,36 @@ uint8 check_DHCP_state(SOCKET s)
 			#ifdef DHCP_DEBUG	   
 				printf("Fail to create the DHCPC_SOCK(%u)\r\n",SOCK_DHCP);
 			#endif   
-			return DHCP_RET_ERR;														/*socket初始化错误*/
+			return DHCP_RET_ERR;												  /*socket初始化错误*/
 		}
 	}
 	switch ( dhcp_state )
 	{
 		case STATE_DHCP_READY:													  /*DHCP初始化状态*/
-			DHCP_timeout = 0;																/*DHCP超时标志设置为1*/
-			reset_DHCP_time();															/*复位超时时间*/
-			send_DHCP_DISCOVER();														/*发送DISCOVER包*/
+			DHCP_timeout = 0;													  /*DHCP超时标志设置为1*/
+			reset_DHCP_time();													  /*复位超时时间*/
+			send_DHCP_DISCOVER();												  /*发送DISCOVER包*/
 	
-			DHCP_timer = 0;																	/*set_timer0(DHCP_timer_handler);  */ 	
-			dhcp_state = STATE_DHCP_DISCOVER;								/*DHCP的DISCOVER状态*/
+			DHCP_timer = 0;														  /*set_timer0(DHCP_timer_handler);  */ 	
+			dhcp_state = STATE_DHCP_DISCOVER;								      /*DHCP的DISCOVER状态*/
 			break;	 
   
 		case STATE_DHCP_DISCOVER:
 			if (type == DHCP_OFFER) 
 			{
-				reset_DHCP_time();														/*复位超时时间*/
-				send_DHCP_REQUEST();													/*发送REQUEST包*/
+				reset_DHCP_time();												  /*复位超时时间*/
+				send_DHCP_REQUEST();											  /*发送REQUEST包*/
 				dhcp_state = STATE_DHCP_REQUEST;
 				#ifdef DHCP_DEBUG			
 					printf("state : STATE_DHCP_REQUEST\r\n");
 				#endif			
 			}
 			else 
-				check_DHCP_Timeout();													/*检查是否超时*/
+				check_DHCP_Timeout();											  /*检查是否超时*/
 			break;
 		
-		case STATE_DHCP_REQUEST :													/*DHCP的REQUEST状态*/
-			if (type == DHCP_ACK) 													/*接收到DHCP服务器回应的off封包*/
+		case STATE_DHCP_REQUEST :												  /*DHCP的REQUEST状态*/
+			if (type == DHCP_ACK) 												  /*接收到DHCP服务器回应的off封包*/
 			{
 				reset_DHCP_time();
 				if (check_leasedIP()) 
@@ -778,32 +778,32 @@ void do_dhcp(void)
 {
 
 	uint8 dhcpret=0;
-	ip_from=IP_FROM_DHCP;	/*IP配置方法选择为DHCP*/
-	dhcp_timer_init();																 /*初始化DHCP定时器*/
+	ip_from=IP_FROM_DHCP;								/*IP配置方法选择为DHCP*/
+	dhcp_timer_init();								    /*初始化DHCP定时器*/
 	if(Conflict_flag == 1)
 	{
-		init_dhcp_client();				                       /*初始化DHCP客户端*/ 
+		init_dhcp_client();				                /*初始化DHCP客户端*/ 
 		Conflict_flag =0;
 	}
 	
-	dhcpret = check_DHCP_state(SOCK_DHCP);             /*获取DHCP服务状态*/
+	dhcpret = check_DHCP_state(SOCK_DHCP);              /*获取DHCP服务状态*/
 	
 	switch(dhcpret)
 	{
-		case DHCP_RET_NONE:                              /*IP地址获取不成功*/ 
+		case DHCP_RET_NONE:                             /*IP地址获取不成功*/ 
 			break;
 		
-		case DHCP_RET_TIMEOUT:                           /*IP地址获取超时*/ 
+		case DHCP_RET_TIMEOUT:                          /*IP地址获取超时*/ 
 			break;
 		
-		case DHCP_RET_UPDATE:														 /*成功获取到IP地址*/ 
+		case DHCP_RET_UPDATE:							/*成功获取到IP地址*/ 
 		  dhcp_ok=1;                  
-			set_w5500_ip();                                /*将获取到的IP地址写入W5500寄存器*/ 
+			set_w5500_ip();                             /*将获取到的IP地址写入W5500寄存器*/ 
 			printf(" 已从DHCP服务器成功获得IP地址\r\n");
 
 	    break;
 		
-		case DHCP_RET_CONFLICT:                          /*IP地址获取冲突*/ 
+		case DHCP_RET_CONFLICT:                         /*IP地址获取冲突*/ 
 			printf(" 从DHCP获取IP地址失败\r\n");
       dhcp_state = STATE_DHCP_READY; 
       printf(" 重试中\r\n");

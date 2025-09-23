@@ -41,33 +41,49 @@
 #define __MAIN_H
 
 /* Includes ------------------------------------------------------------------*/
+// ... existing code ...
+
+/* Includes ------------------------------------------------------------------*/
+// 标准库头文件
+#include <string.h>
+#include <malloc.h>
+
+// 第三方库头文件
+#include "FreeRTOS.h"
+
+// STM32 HAL库头文件
 #include "stm32f4xx_hal.h"
 
+// 项目自定义头文件
 #include "timer.h"
-
 #include "led.h"
-
-#include "malloc.h"
-
 #include "usart.h"
-
-#include "string.h"
-
 #include "bsp_TiMbase.h"
-
 #include "w5500_conf.h"
-
 #include "bsp_motor_conf.h"
-
 #include "bsp_motor.h"
-
 #include "InstrumentInclude.h"
-
-#include "led.h"
-
 #include "ADS8688_conf.h"
-
 #include "timers.h"
+#include "sys.h"
+#include "delay.h"
+#include "laser.h"
+// #include "key.h"
+#include "bsp_pwm_conf.h"
+#include "bsp_adc.h"
+#include "bsp_pid.h"
+#include "utility.h"
+#include "poct_process.h"
+#include "bsp_i2c_ee.h"
+#include "bsp_i2c_gpio.h"
+#include "StartTask.h"
+#include "pac9535.h"
+#include "DIV_Control.h"
+#include "mytimer.h"
+#include "fuzzypid.h"
+#include "UltraSound.h"
+
+// ... existing code ...
 
 /* Exported types ------------------------------------------------------------*/
 

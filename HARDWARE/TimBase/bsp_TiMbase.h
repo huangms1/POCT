@@ -4,7 +4,7 @@
 #include "stm32f4xx.h"
 
 
-extern TIM_HandleTypeDef TIM5_Handler;	//TIM5¾ä±ú 	
+extern TIM_HandleTypeDef TIM5_Handler;	//TIM5å¥æŸ„ 	
 
 void TIM5_NVIC_Configuration(void);
 //void TIM5_Configuration(void);

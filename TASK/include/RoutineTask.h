@@ -8,9 +8,9 @@
 #include "poct_process.h"
 
 //任务优先级
-#define ROUTINE_TASK_PRIO		2
+#define ROUTINE_TASK_PRIO		4
 //任务堆栈大小	
-#define ROUTINE_STK_SIZE 		128  
+#define ROUTINE_STK_SIZE 		1024  
 //任务句柄
 extern TaskHandle_t RoutineTask_Handler;
 

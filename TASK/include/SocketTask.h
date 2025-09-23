@@ -6,7 +6,7 @@
 #include "tcp_handler.h"
 
 //任务优先级
-#define SOCKET_TASK_PRIO		5
+#define SOCKET_TASK_PRIO		1
 //任务堆栈大小	
 #define SOCKET_STK_SIZE 		128  
 //任务句柄

@@ -2,11 +2,7 @@
 #define _TIMER_H
 #include "sys.h"
 
-
-
-
-
-extern TIM_HandleTypeDef TIM10_Handler;      //¶¨Ê±Æ÷¾ä±ú 
+extern TIM_HandleTypeDef TIM10_Handler;      //å®šæ—¶å™¨å¥æŸ„ 
 
 void TIM10_Init(u16 arr,u16 psc);
 

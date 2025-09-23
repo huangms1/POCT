@@ -5,8 +5,8 @@
 #include "InstrumentInclude.h"
 
 
-extern TIM_HandleTypeDef TIM8_Handler; //¶¨Ê±Æ÷8 PWM¾ä±ú
-extern TIM_HandleTypeDef TIM9_Handler; //¶¨Ê±Æ÷9 PWM¾ä±ú
+extern TIM_HandleTypeDef TIM8_Handler; //å®šæ—¶å™¨8 PWMå¥æŸ„
+extern TIM_HandleTypeDef TIM9_Handler; //å®šæ—¶å™¨9 PWMå¥æŸ„
 
 
 /*=====================PWM IO======================*/

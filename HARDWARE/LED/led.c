@@ -16,6 +16,8 @@
 
 #include "delay.h"
 
+#define MAX_LED  8
+
 void MyDelay(uint16_t num);
 
 /**
@@ -88,43 +90,63 @@ void LED_Init(void)
 	LED1_SPI_CS_ENABLE();
 	
 	//系统指示灯
-    GPIO_Initure.Pin = SYS_LED_PIN;            //PA3
-    GPIO_Initure.Mode = GPIO_MODE_OUTPUT_PP;   //推挽输出
-    GPIO_Initure.Pull = GPIO_PULLUP;           //上拉
+    GPIO_Initure.Pin   = SYS_LED_PIN;            //PA3
+    GPIO_Initure.Mode  = GPIO_MODE_OUTPUT_PP;   //推挽输出
+    GPIO_Initure.Pull  = GPIO_PULLUP;           //上拉
     GPIO_Initure.Speed = GPIO_SPEED_HIGH;      //高速
     HAL_GPIO_Init(SYS_LED_PORT,&GPIO_Initure);	
     	
-	GPIO_Initure.Pin = LED_SPI_CLK_PIN; 
-	GPIO_Initure.Mode = GPIO_MODE_OUTPUT_PP;   //推挽输出
-    GPIO_Initure.Pull = GPIO_PULLUP;           //上拉
+	GPIO_Initure.Pin    = LED_SPI_CLK_PIN; 
+	GPIO_Initure.Mode   = GPIO_MODE_OUTPUT_PP;   //推挽输出
+    GPIO_Initure.Pull   = GPIO_PULLUP;           //上拉
 	 GPIO_Initure.Speed = GPIO_SPEED_HIGH;     //高速
 	HAL_GPIO_Init(LED_SPI_CLK_PORT,&GPIO_Initure);	
 	
-	GPIO_Initure.Pin=LED_SPI_SDI_PIN; 
-	GPIO_Initure.Mode = GPIO_MODE_OUTPUT_PP;   //推挽输出
-    GPIO_Initure.Pull = GPIO_PULLUP;           //上拉
+	GPIO_Initure.Pin    = LED_SPI_SDI_PIN; 
+	GPIO_Initure.Mode   = GPIO_MODE_OUTPUT_PP;   //推挽输出
+    GPIO_Initure.Pull   = GPIO_PULLUP;           //上拉
 	 GPIO_Initure.Speed = GPIO_SPEED_HIGH;     //高速
 	HAL_GPIO_Init(LED_SPI_SDI_PORT,&GPIO_Initure);
 	
-	GPIO_Initure.Pin = LED_SPI_CS_PIN; 
-	GPIO_Initure.Mode = GPIO_MODE_OUTPUT_PP;   //推挽输出
-    GPIO_Initure.Pull = GPIO_PULLUP;           //上拉
+	GPIO_Initure.Pin    = LED_SPI_CS_PIN; 
+	GPIO_Initure.Mode   = GPIO_MODE_OUTPUT_PP;   //推挽输出
+    GPIO_Initure.Pull   = GPIO_PULLUP;           //上拉
 	 GPIO_Initure.Speed = GPIO_SPEED_HIGH;     //高速
 	HAL_GPIO_Init(LED_SPI_CS_PORT,&GPIO_Initure);
 	
-	GPIO_Initure.Pin = LED1_SPI_CS_PIN; 
-	GPIO_Initure.Mode = GPIO_MODE_OUTPUT_PP;   //推挽输出
-    GPIO_Initure.Pull = GPIO_PULLUP;           //上拉
+	GPIO_Initure.Pin    = LED1_SPI_CS_PIN; 
+	GPIO_Initure.Mode   = GPIO_MODE_OUTPUT_PP;   //推挽输出
+    GPIO_Initure.Pull   = GPIO_PULLUP;           //上拉
 	 GPIO_Initure.Speed = GPIO_SPEED_HIGH;     //高速
 	HAL_GPIO_Init(LED1_SPI_CS_PORT,&GPIO_Initure);
 	
 //	HAL_GPIO_WritePin(LED_SPI_CS_PORT,LED_SPI_CS_PIN,GPIO_PIN_SET);	//PB0置1，默认初始化后灯灭
-	LED_SPI_CS = 1;
+	LED_SPI_CS  = 1;
 	LED1_SPI_CS = 1;
-	HAL_GPIO_WritePin(GPIOA,GPIO_PIN_3,GPIO_PIN_SET);	//PB0置1，默认初始化后灯灭
+	HAL_GPIO_WritePin(GPIOA,GPIO_PIN_3,GPIO_PIN_SET);	            //PB0置1，默认初始化后灯灭
 	
 	sysStateLEDInit();
 	
+	// JG_init();
+}
+
+void JG_init(void)
+{
+	GPIO_InitTypeDef GPIO_Initure;	
+	
+	JG_LED_CLK_ENABLE();
+	
+	GPIO_Initure.Pin   = JG_LED_PIN;
+
+	GPIO_Initure.Mode  = GPIO_MODE_OUTPUT_PP;  
+
+    GPIO_Initure.Pull  = GPIO_PULLUP;        
+
+    GPIO_Initure.Speed = GPIO_SPEED_HIGH; 
+
+	HAL_GPIO_Init(JG_LED_PORT,&GPIO_Initure);
+	
+	HAL_GPIO_WritePin(JG_LED_PORT,JG_LED_PIN,GPIO_PIN_RESET);	
 }
 
 
@@ -133,7 +155,7 @@ void LED_Init(void)
  *
  * This function sends data to LEDs using SPI. It takes two parameters:
  * - num: Specifies the LED number to which data is sent. If num is greater than 5,
- *         it sends data to LED1, otherwise it sends data to LED.
+ *        it sends data to LED1, otherwise it sends data to LED.
  * - data: Specifies the data to be sent to the LED.
  *
  * @param  num: The LED number to which data is sent.
@@ -142,7 +164,6 @@ void LED_Init(void)
  */
 void LED_SPI_SendData(uint8_t num ,uint8_t data)
 {
-	int i;
 	uint8_t temp1 = 0,temp2 = 0;
 	
 	if(num > 5)
@@ -155,7 +176,7 @@ void LED_SPI_SendData(uint8_t num ,uint8_t data)
 		LED_SPI_CS = 0;
 	}
 	
-	for(i=0;i<3;i++)
+	for(int i = 0;i < 3;i++)
 	{
 		temp1 = num&0x04;//按位与
 		if(temp1)
@@ -165,33 +186,28 @@ void LED_SPI_SendData(uint8_t num ,uint8_t data)
 		else 
 		{
 			LED_SPI_SDI =0;
-		}
-		//MyDelay(2000);
+		}		
 		delay_us(4);
 		LED_SPI_CLK = 1;
 		delay_us(4);
-		//MyDelay(2000);
-		LED_SPI_CLK =0;
+		LED_SPI_CLK = 0;
 		num<<=1; 
 	}
-	i = 0;
-	
-	for(i=0;i<8;i++)
+
+	for(int i = 0;i < 8;i++)
 	{
 		temp2=data&0x80;//按位与
 		if(temp2)
 			LED_SPI_SDI = 1;
 		else 
 			LED_SPI_SDI = 0;
-		//MyDelay(2000);
 		delay_us(4);
 		LED_SPI_CLK = 1;
-		//MyDelay(2000);
 		delay_us(4);
 		LED_SPI_CLK = 0;
 		data<<=1; 		
 	}	
-	LED_SPI_CS = 1;
+	LED_SPI_CS  = 1;
 	LED1_SPI_CS = 1;
 }
 
@@ -213,45 +229,15 @@ void MyDelay(uint16_t num)
 	}
 }
 
-/**
- * @brief  Turns off all LEDs.
- *
- * This function sends a command to turn off all LEDs connected to the system.
- * It sends a command to turn off each LED individually, with a delay of 5ms between each command.
- *
- * @param  None
- * @retval None
- */
 void ALL_LED_OFF(void)
 {
-	LED_SPI_SendData(0 ,0);
-	delay_ms(5); 
-	LED_SPI_SendData(1 ,0);
-	delay_ms(5);
-	LED_SPI_SendData(2 ,0);
-	delay_ms(5);
-	LED_SPI_SendData(3 ,0);
-	delay_ms(5);
-	LED_SPI_SendData(4 ,0);
-	delay_ms(5);
-	LED_SPI_SendData(5 ,0);
-	delay_ms(5);
-	LED_SPI_SendData(6 ,0);
-	delay_ms(5);
-	LED_SPI_SendData(7 ,0);
-	delay_ms(5);
+    for (int i = 0; i < MAX_LED; i++)
+    {
+        LED_SPI_SendData(i, 0);
+        delay_ms(5); 
+    }
 }
 
-/**
- * @brief  Controls the state of the LEDs based on event group flags.
- *
- * This function checks the state of the event group flags and controls the state of the LEDs accordingly.
- * If the event group handle is not NULL, it retrieves the current state of the event group flags.
- * Based on the flags, it sets or clears the corresponding LED states.
- *
- * @param  None
- * @retval None
- */
 void LED_StateControl(void)
 {
 	EventBits_t ledVelue;

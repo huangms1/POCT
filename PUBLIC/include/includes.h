@@ -10,7 +10,7 @@
 #include "PublicDefine.h"
 
 
-//°ж±ѕ№ЬАн
+//з‰€жњ¬з®Ўзђ†
 #define IS_ANIMAL_PROGRAM                            1
 
 typedef uint32_t OS_STK;

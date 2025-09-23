@@ -117,9 +117,9 @@
 //}
 void ActIfNetStateChanged(void)
 {
-	switch(getSn_SR(SOCK_TCPC))								  				         /*获取socket的状态*/
+	switch(getSn_SR(SOCK_TCPC))								  				              /*获取socket的状态*/
 	{
-		case SOCK_CLOSED:											        		     /*socket处于关闭状态*/
+		case SOCK_CLOSED:											        		      /*socket处于关闭状态*/
 			socket(SOCK_TCPC,Sn_MR_TCP,local_port++,Sn_MR_ND);
 		  break;
 		
@@ -127,13 +127,12 @@ void ActIfNetStateChanged(void)
 			connect(SOCK_TCPC,remote_ip,remote_port);                 				      /*socket连接服务器*/ 
 		  break;
 		
-		case SOCK_ESTABLISHED: 												             /*socket处于连接建立状态*/
+		case SOCK_ESTABLISHED: 												              /*socket处于连接建立状态*/
 		  break;
 			
 		case SOCK_CLOSE_WAIT: 											    	         /*socket处于等待关闭状态*/
 			close(SOCK_TCPC);
-		 break;
-						
+		 break;						
 	}
 }
 

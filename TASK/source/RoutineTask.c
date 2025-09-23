@@ -77,34 +77,46 @@ void MainRoutine(void)
 	}
 }
 
+/**
+  * @brief  主系统初始化函数
+  * @note   功能说明：
+  *         1. 设置全局设备状态为IDLE
+  *         2. 循环等待网络连接就绪信号量
+  *         3. 非Bootloader模式下执行电机复位
+  *         4. 关闭所有LED指示灯
+  * @warning 本函数包含阻塞操作，会持续等待网络连接信号量
+  */
 static void MainInit(void)
 {
 	BaseType_t err = pdFALSE;
 	
 	Globle.Mechine.State = IDLE;
 	
+	// 等待网络连接信号量（最长等待时间portMAX_DELAY）
 	while(1)
 	{
-		if(Socket_InitSeceass_SemaphoreHandle!=NULL)
+		if(Socket_InitSeceass_SemaphoreHandle != NULL)
 		{
-			err = xSemaphoreTake(Socket_InitSeceass_SemaphoreHandle,portMAX_DELAY);	//获取网络链接信号量
-			if(err==pdTRUE)									
+			// 尝试获取网络连接成功信号量
+			err = xSemaphoreTake(Socket_InitSeceass_SemaphoreHandle,portMAX_DELAY);	
+			if(err == pdTRUE)									
 			{
-				break; //网络链接成功
+				break; // 成功获取信号量，网络连接建立
 			}
+			vTaskDelay(5); // 短暂延时避免CPU占用过高
 		}
-		else if(err==pdFALSE)
+		else if(err == pdFALSE)
 		{
 			vTaskDelay(5); 
 		}
 	}
 
 #if IS_BOOTLOADER_PROGRAM
-	
+    // Bootloader模式下跳过硬件初始化
 #else
-	ALL_Motor_RESET();
+    ALL_Motor_RESET(); // 复位所有电机驱动器
 #endif
-	ALL_LED_OFF();		
+    ALL_LED_OFF();     // 关闭所有状态指示灯
 }
 
 //static void SetWatchDog(uint iBarkInterval)

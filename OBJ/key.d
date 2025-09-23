@@ -1,5 +1,4 @@
 ..\obj\key.o: ..\HARDWARE\KEY\key.c
-..\obj\key.o: ..\HARDWARE\KEY\key.h
 ..\obj\key.o: ..\SYSTEM\sys\sys.h
 ..\obj\key.o: ..\USER\stm32f4xx.h
 ..\obj\key.o: ..\USER\stm32f429xx.h
@@ -72,4 +71,3 @@
 ..\obj\key.o: ..\HALLIB\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_usb.h
 ..\obj\key.o: ..\HALLIB\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_pcd_ex.h
 ..\obj\key.o: ..\HALLIB\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_hcd.h
-..\obj\key.o: ..\SYSTEM\delay\delay.h

@@ -1,6 +1,7 @@
 #ifndef __BSP_MOTOR_H
 #define	__BSP_MOTOR_H
 
+// 标准库头文件
 #include "stm32f4xx.h"
 #include "FreeRTOS.h"
 #include "event_groups.h"
@@ -8,59 +9,49 @@
 #include <stdbool.h>
 #include "InstrumentInclude.h"
 
+/* 电机参数配置 */
+#define TOTAL_MOTOR         13       // 电机总数
+#define FORM_LEN            5000     // 速度曲线数组长度
+#define MIN_FRE             50       // 最小频率(Hz)
+#define RST_MAX_STEP        0xFFFFFF // 复位最大步数
+#define MOTOR_RES_TIMEOUT   25       // 复位超时时间(s)
 
-//#include "sys.h"
-
-#define TOTAL_MOTOR    13        
-
-#define FORM_LEN 	   5000
-
-#define MIN_FRE        50         
-
-#define RST_MAX_STEP   0xFFFFFF
-
-
-#define MOTOR_RES_TIMEOUT  25
-
-#define T1_FREQ               (SystemCoreClock / TIM_PRESCALER)
-
-#define STEP_ANGLE			   1.8f					            
-
-#define FSPR              	   (360.0f / 1.8f)                  
-			
-#define MICRO_STEP        	   16          				        
-
-#define SPR               	  (FSPR * MICRO_STEP)               
-
-#define CONVER(speed)         (float)(speed * SPR / 60.0f)      
-  
-#define MIN_SPEED             (float)(T1_FREQ / TIM_PERIOD)    
-	
-typedef struct speedCale{
-	 __IO int32_t Vo;                  
-	 __IO int32_t Vt;                  
-	 __IO int32_t AccelTotalStep;     
-	 __IO int32_t DecPoint;           
-	 __IO int32_t TotalStep;          
-	 __IO int32_t INC_AccelTotalStep; 
-	 __IO int32_t Dec_AccelTotalStep; 
-	 __IO float Form[FORM_LEN];      
-	 __IO uint8_t  deceleration_flag;
-	 TIM_HandleTypeDef * htim;
-	 __IO uint8_t motor_num;
-}SpeedCalc_TypeDef;
+/* 步进电机计算参数 */
+#define T1_FREQ            (SystemCoreClock / TIM_PRESCALER)  // 定时器频率
+#define STEP_ANGLE         1.8f      // 步距角(度)
+#define FSPR               (360.0f / STEP_ANGLE) // 每转步数
+#define MICRO_STEP         16        // 微步数
+#define SPR                (FSPR * MICRO_STEP) // 每转微步数
+#define CONVER(speed)      ((float)(speed * SPR / 60.0f)) // 速度转换
+#define MIN_SPEED          ((float)(T1_FREQ / TIM_PERIOD)) // 最小速度
+ 	
+/* 速度计算结构体 */
+typedef struct {
+    __IO int32_t Vo;                // 初始速度
+    __IO int32_t Vt;                // 目标速度
+    __IO int32_t AccelTotalStep;    // 总加速步数
+    __IO int32_t DecPoint;          // 减速点
+    __IO int32_t TotalStep;         // 总步数
+    __IO int32_t INC_AccelTotalStep;// 加速阶段步数
+    __IO int32_t Dec_AccelTotalStep;// 减速阶段步数
+    __IO float   Form[FORM_LEN];    // 速度曲线数组
+    __IO uint8_t deceleration_flag; // 减速标志
+    TIM_HandleTypeDef *htim;        // 定时器句柄
+    __IO uint8_t motor_num;         // 电机编号
+} SpeedCalc_TypeDef;
 
 extern SpeedCalc_TypeDef * pSpeedGloble[3];
 
+/* 电机状态结构体 */
 typedef struct {
-	 __IO uint8_t  status;            
-	 __IO uint8_t  dir;                
-	 __IO uint32_t pos;               
-	 __IO uint32_t position;           
-	 __IO uint32_t pluse_time;         
-	 __IO uint16_t start_flag;       
-	 __IO uint32_t index;
-}Stepper_Typedef;
+    __IO uint8_t  status;           // 运行状态
+    __IO uint8_t  dir;              // 方向
+    __IO uint32_t pos;              // 当前位置
+    __IO uint32_t position;         // 绝对位置
+    __IO uint32_t pluse_time;       // 脉冲时间
+    __IO uint16_t start_flag;       // 启动标志
+    __IO uint32_t index;            // 索引
+} Stepper_Typedef;
 
 extern Stepper_Typedef Stepper[TOTAL_MOTOR];
 
@@ -121,8 +112,7 @@ void MotorFre_Abs_Run(uint32_t step,uint8_t motor_num,uint8_t dir,uint16_t fre);
 
 void Motor_Run(uint32_t step,uint8_t motor_num,uint8_t dir,uint16_t fre);
 
-
-void PUMP_Mix_Func(uint8_t times,uint32_t temp_v,uint8_t wTime);
+void PUMP_Mix_Func(uint8_t times,uint32_t temp_v,uint8_t wTime,uint16_t fre);
 
 void PUMP_FP_Func(uint32_t step);
 
@@ -132,11 +122,11 @@ GPIO_TypeDef *Port,uint16_t Pin,uint8_t tl);
 uint8_t Motor_HighLeve_Rst(uint16_t fre,uint8_t motor_num,uint8_t dir,\
 GPIO_TypeDef *Port,uint16_t Pin,uint8_t tl);
 
-void ZD_motor_run(SMsg * pMsg);
+//void ZD_motor_run(SMsg * pMsg);
 
 void scan_module_reset(void);
 
-void motor_fast_rst(uint8_t motor_num,uint8_t dir,GPIO_TypeDef *gpio_port,uint16_t gpio_pin);
+bool motor_fast_rst(uint8_t motor_num,uint8_t dir,GPIO_TypeDef *gpio_port,uint16_t gpio_pin);
 
 
 #endif /*__BSP_MOTOR_H */

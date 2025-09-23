@@ -18,12 +18,9 @@
 #include "AppMsgDefine.h"
 #include "StartTask.h"
 #include "mytimer.h"
-
-//#define DOOR_FRE       500     //开关门频率  6000
+#include "laser.h"
 
 #define MOTOR_CONF_NUM  12
-
-//#define HOTCAP_TEMP     1060  
 
 /* 步进电机结构体 */
 typedef struct{
@@ -45,15 +42,15 @@ extern Motor_Conf_TypeDef Motor_Conf[MOTOR_CONF_NUM];
 #define M01_FRE        1500    
 #define M02_FRE        1500     
 #define M03_FRE        1500   
-#define M04_FRE        800
-#define M05_FRE        800     //500
-#define M06_FRE        800    
+#define M04_FRE        1500
+#define M05_FRE        1000     //500
+#define M06_FRE        1500    
 #define M07_FRE        1800     
-#define M08_FRE        800    
+#define M08_FRE        1500    
 #define M09_FRE        1000   
-#define M10_FRE        800  
-#define M11_FRE        800 
-#define M12_FRE        800    
+#define M10_FRE        1600  
+#define M11_FRE        1000 
+#define M12_FRE        1000    
 #define M13_FRE        1500 
 #define M14_FRE        2000
 #define M15_FRE        800
@@ -75,18 +72,9 @@ extern Motor_Conf_TypeDef Motor_Conf[MOTOR_CONF_NUM];
 #define M15_DIR        CW
 
 //混匀
-#define MIX_VL            20000UL
+#define MIX_VL            30000UL
 #define MIX_SPEED         3000
 #define MIX_TIMES         10
-
-
-#define MIX_TEMP_V1   27500
-
-#define MIX_TEMP_V2   30000
-
-#define MIX_TEMP_V3   30000
-
-#define MIX_TEMP_V4   30000
 
 #define M09_M10_UP_FRE    2000 
 #define M09_M10_DOWN_FRE  300  //缓慢磁吸速度
@@ -107,7 +95,8 @@ typedef struct POCT_EEPROM
 	uint32_t M02_P1;    //温控前进1位置
 	uint32_t M02_P2;    //温控前进2位置
 	
-	uint32_t M03_P[2];
+	uint32_t M01_P2;
+	uint32_t M03_P[1];
 
 	uint32_t M08_LED_P[8];    //M08LED上下位置
 
@@ -161,15 +150,15 @@ typedef struct SavaPara
 
 typedef struct TempControl
 {
-	__IO uint8_t Temp_Ch1_ENABLE;
+	uint8_t Temp_Ch1_ENABLE;
 	
-	__IO uint8_t Temp_Ch2_ENABLE;
+	uint8_t Temp_Ch2_ENABLE;
 	
-	__IO uint8_t Temp_Ch3_ENABLE;
+	uint8_t Temp_Ch3_ENABLE;
 	
-	__IO uint8_t Temp_Ch4_ENABLE;
+	uint8_t Temp_Ch4_ENABLE;
 	
-	__IO uint8_t  Temp_Ch5_ENABLE;
+	uint8_t  Temp_Ch5_ENABLE;
 	
 	__IO uint16_t Temp_Ch1_Set;
 	
@@ -201,9 +190,11 @@ typedef struct __GLOBLE
 	
 	__IO uint16_t washTime;
 	
-	__IO uint8_t FaNum;
+	__IO uint8_t CurrentValvePos;
 	
-	__IO uint8_t LastFaNum;
+	__IO uint8_t LastValvePos;
+	
+	__IO uint8_t LastDirection;
 	
 	POCT_EEPROMTypedef POCT_Par;
 	

@@ -11,9 +11,9 @@
 //PID结构体
 typedef struct PID_Pre{
 	
-	int target_temp;  //目标值
+	float target_temp;  //目标值
 	
-	int current_temp; //当前值
+	float current_temp; //当前值
 	
 	float err;        //e(k)  本次偏差
 	
@@ -23,11 +23,11 @@ typedef struct PID_Pre{
 	
 	float Kp, Ki, Kd;
 	
-	int pwm;          //计算结果输出
+	uint16_t pwm;          //计算结果输出
 	
 }PIDTypedef;
 
-extern PIDTypedef PID[5];
+extern PIDTypedef PID[3];
 
 void PID_Init(void);
 

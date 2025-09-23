@@ -84,7 +84,6 @@ void WriteFreeLog(const char * pFormat,...)
 	Push2Queue(gpLogQueue,pByteArray);
 }
 
-
 void LogTask(void *pData)
 {
 	gpLogQueue = CreateQueue();

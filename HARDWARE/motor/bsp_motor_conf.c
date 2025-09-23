@@ -4,7 +4,7 @@
   * @author  hms
   * @version V1.0
   * @date    2021.11.11
-  * @brief   ÓÃÓÚµç»ú¶¨Òå
+  * @brief   ç”¨äºç”µæœºå®šä¹‰
   ******************************************************************************
   * @attention
   ******************************************************************************
@@ -15,10 +15,10 @@
 #include "FreeRTOS.h"
 #include "stm32f4xx_it.h"
 
-TIM_HandleTypeDef  TIM4_Handler; //¶¨Ê±Æ÷4 PWM¾ä±ú¡£¿ØÖÆµç»ú
-TIM_HandleTypeDef  TIM1_Handler; //¶¨Ê±Æ÷1 PWM¾ä±ú£¬¿ØÖÆµç»ú
-TIM_HandleTypeDef  TIM2_Handler; //¶¨Ê±Æ÷2 PWM¾ä±ú£¬¿É²»Ê¹ÓÃ
-TIM_HandleTypeDef  TIM3_Handler; //¶¨Ê±Æ÷2 PWM¾ä±ú£¬¿ØÖÆµç»ú
+TIM_HandleTypeDef  TIM4_Handler; //å®šæ—¶å™¨4 PWMå¥æŸ„ã€‚æ§åˆ¶ç”µæœº
+TIM_HandleTypeDef  TIM1_Handler; //å®šæ—¶å™¨1 PWMå¥æŸ„ï¼Œæ§åˆ¶ç”µæœº
+TIM_HandleTypeDef  TIM2_Handler; //å®šæ—¶å™¨2 PWMå¥æŸ„ï¼Œå¯ä¸ä½¿ç”¨
+TIM_HandleTypeDef  TIM3_Handler; //å®šæ—¶å™¨2 PWMå¥æŸ„ï¼Œæ§åˆ¶ç”µæœº
 
 #if IS_BOOTLOADER_PROGRAM
 
@@ -42,7 +42,7 @@ Motor_en_conf_Typedef Boot_Motor_EN[17] = {
    {GPIO_PIN_0,GPIOD},
 };
 
-//·ÀÖ¹µç»úµçÁ÷¹ı´óÉÕµô
+//é˜²æ­¢ç”µæœºç”µæµè¿‡å¤§çƒ§æ‰
 void  BootMotorENConf(void)
 {
 	GPIO_InitTypeDef GPIO_InitStruct;
@@ -56,7 +56,7 @@ void  BootMotorENConf(void)
 
 	for(i = 0; i < 17; i++)
 	{
-		/*Ñ¡ÔñÒª¿ØÖÆµÄGPIOÒı½Å*/															   
+		/*é€‰æ‹©è¦æ§åˆ¶çš„GPIOå¼•è„š*/															   
 		GPIO_InitStruct.Pin   = Boot_Motor_EN[i].en_pin;	
 		GPIO_InitStruct.Mode  = GPIO_MODE_OUTPUT_PP;  
 		GPIO_InitStruct.Pull  = GPIO_PULLUP;  
@@ -88,11 +88,11 @@ void fan_init(void)
 
 
 
-//TIM4³õÊ¼»¯   µç»úM01 Í¨µÀ2  M02-> Í¨µÀ1  M03-> Í¨µÀ3  M08-> Í¨µÀ4
+//TIM4åˆå§‹åŒ–   ç”µæœºM01 é€šé“2  M02-> é€šé“1  M03-> é€šé“3  M08-> é€šé“4
 void Motor_TIM4_Init(uint16_t psc,uint16_t arr)
 {
 	TIM_OC_InitTypeDef TIM_OCInitStructure;
-	/*Ê¹ÄÜ¶¨Ê±Æ÷4*/
+	/*ä½¿èƒ½å®šæ—¶å™¨4*/
 	__TIM4_CLK_ENABLE();
 	
 	TIM4_Handler.Instance           = TIM4; 
@@ -103,29 +103,29 @@ void Motor_TIM4_Init(uint16_t psc,uint16_t arr)
 	TIM4_Handler.Init.RepetitionCounter = 0;
 	HAL_TIM_OC_Init(&TIM4_Handler);
 	
-	/*PWMÄ£Ê½ÅäÖÃ--ÕâÀïÅäÖÃÎªÊä³ö±È½ÏÄ£Ê½*/
-	TIM_OCInitStructure.OCMode = TIM_OCMODE_TOGGLE;
-	/*±È½ÏÊä³öµÄ¼ÆÊıÖµ*/
-	TIM_OCInitStructure.Pulse = 0;
-	/*µ±¶¨Ê±Æ÷¼ÆÊıÖµĞ¡ÓÚCCR1_ValÊ±Îª¸ßµçÆ½*/
-	TIM_OCInitStructure.OCPolarity = TIM_OCPOLARITY_HIGH;
-	/*ÉèÖÃ»¥²¹Í¨µÀÊä³öµÄ¼«ĞÔ*/
-	TIM_OCInitStructure.OCNPolarity = TIM_OCNPOLARITY_LOW;
-	/*¿ìËÙÄ£Ê½ÉèÖÃ*/
-	TIM_OCInitStructure.OCFastMode = TIM_OCFAST_DISABLE;
-	/*¿ÕÏĞµçÆ½*/
-	TIM_OCInitStructure.OCIdleState = TIM_OCIDLESTATE_RESET;
-	/*»¥²¹Í¨µÀÉèÖÃ*/
+	/*PWMæ¨¡å¼é…ç½®--è¿™é‡Œé…ç½®ä¸ºè¾“å‡ºæ¯”è¾ƒæ¨¡å¼*/
+	TIM_OCInitStructure.OCMode       = TIM_OCMODE_TOGGLE;
+	/*æ¯”è¾ƒè¾“å‡ºçš„è®¡æ•°å€¼*/
+	TIM_OCInitStructure.Pulse        = 0;
+	/*å½“å®šæ—¶å™¨è®¡æ•°å€¼å°äºCCR1_Valæ—¶ä¸ºé«˜ç”µå¹³*/
+	TIM_OCInitStructure.OCPolarity   = TIM_OCPOLARITY_HIGH;
+	/*è®¾ç½®äº’è¡¥é€šé“è¾“å‡ºçš„ææ€§*/
+	TIM_OCInitStructure.OCNPolarity  = TIM_OCNPOLARITY_LOW;
+	/*å¿«é€Ÿæ¨¡å¼è®¾ç½®*/
+	TIM_OCInitStructure.OCFastMode   = TIM_OCFAST_DISABLE;
+	/*ç©ºé—²ç”µå¹³*/
+	TIM_OCInitStructure.OCIdleState  = TIM_OCIDLESTATE_RESET;
+	/*äº’è¡¥é€šé“è®¾ç½®*/
 	TIM_OCInitStructure.OCNIdleState = TIM_OCNIDLESTATE_RESET;
 	
 	HAL_TIM_OC_ConfigChannel(&TIM4_Handler,&TIM_OCInitStructure,TIM_CHANNEL_1);
 
-	/*È·¶¨¶¨Ê±Æ÷*/
+	/*ç¡®å®šå®šæ—¶å™¨*/
 	HAL_TIM_Base_Stop(&TIM4_Handler);
 	//HAL_TIM_Base_Start(&TIM4_Handler);	
-	//ÉèÖÃÇÀÕ¼ÓÅÏÈ¼¶£¬×ÓÓÅÏÈ¼¶
+	//è®¾ç½®æŠ¢å ä¼˜å…ˆçº§ï¼Œå­ä¼˜å…ˆçº§
 	HAL_NVIC_SetPriority(TIM4_IRQn, 2, 1);
-	// ÉèÖÃÖĞ¶ÏÀ´Ô´
+	// è®¾ç½®ä¸­æ–­æ¥æº
 	HAL_NVIC_EnableIRQ(TIM4_IRQn);
 	
 }
@@ -196,14 +196,12 @@ void Decision_TIM4(TIM_HandleTypeDef*htim,SpeedCalc_TypeDef * pSpeed)
 	}
 }
 
-
 void Decision_leve(TIM_HandleTypeDef*htim,SpeedCalc_TypeDef * pSpeed)
 {
 	
 }
 
-
-//ËÙ¶È¾ö²ß
+//é€Ÿåº¦å†³ç­–
 void motor_Decision(TIM_HandleTypeDef*htim)
 {
 	SpeedCalc_TypeDef * pSpeed = NULL;
@@ -227,101 +225,100 @@ void motor_Decision(TIM_HandleTypeDef*htim)
 		return;
 }
 
-
 /**********************
-*@brief¶¨Ê±Æ÷±È½ÏÖĞ¶Ï
-*@paramhtim£º¶¨Ê±Æ÷¾ä±úÖ¸Õë
-*@noteÎŞ
-*@retvalÎŞ
+*@briefå®šæ—¶å™¨æ¯”è¾ƒä¸­æ–­
+*@paramhtimï¼šå®šæ—¶å™¨å¥æŸ„æŒ‡é’ˆ
+*@noteæ— 
+*@retvalæ— 
 **********************/
 void HAL_TIM_OC_DelayElapsedCallback(TIM_HandleTypeDef*htim)
 {
-	//ÅĞ¶ÏÕıÔÚÔËĞĞ	
+	//åˆ¤æ–­æ­£åœ¨è¿è¡Œ	
 	motor_Decision(htim);	
 }
 
-//TIM2³õÊ¼»¯   µç»úM04 Í¨µÀ1  M05-> Í¨µÀ2  M07-> Í¨µÀ3
+//TIM2åˆå§‹åŒ–   ç”µæœºM04 é€šé“1  M05-> é€šé“2  M07-> é€šé“3
 void Motor_TIM2_Init(uint16_t psc,uint16_t arr)
 {
 	TIM_OC_InitTypeDef TIM_OCInitStructure;
-	/*Ê¹ÄÜ¶¨Ê±Æ÷4*/
+	/*ä½¿èƒ½å®šæ—¶å™¨4*/
 	__TIM2_CLK_ENABLE();
 	
-	TIM2_Handler.Instance=TIM2; 	                       //¶¨Ê±Æ÷4  
-	TIM2_Handler.Init.Prescaler=psc;                       //¶¨Ê±Æ÷·ÖÆµÏµÊı  	
-	TIM2_Handler.Init.CounterMode=TIM_COUNTERMODE_UP;      //ÏòÉÏ¼ÆÊıÄ£Ê½  
-	TIM2_Handler.Init.Period=arr;                          //×Ô¶¯ÖØ×°ÔØÖµ  
+	TIM2_Handler.Instance        = TIM2; 	                    //å®šæ—¶å™¨4  
+	TIM2_Handler.Init.Prescaler  = psc;                       	//å®šæ—¶å™¨åˆ†é¢‘ç³»æ•°  	
+	TIM2_Handler.Init.CounterMode= TIM_COUNTERMODE_UP;      	//å‘ä¸Šè®¡æ•°æ¨¡å¼  
+	TIM2_Handler.Init.Period     = arr;                         //è‡ªåŠ¨é‡è£…è½½å€¼  
 	TIM2_Handler.Init.ClockDivision=TIM_CLOCKDIVISION_DIV1; 	
 	TIM2_Handler.Init.RepetitionCounter = 0;
 	HAL_TIM_OC_Init(&TIM2_Handler);
 	
-	/*PWMÄ£Ê½ÅäÖÃ--ÕâÀïÅäÖÃÎªÊä³ö±È½ÏÄ£Ê½*/
-	TIM_OCInitStructure.OCMode = TIM_OCMODE_TOGGLE;
-	/*±È½ÏÊä³öµÄ¼ÆÊıÖµ*/
-	TIM_OCInitStructure.Pulse=20;
-	/*µ±¶¨Ê±Æ÷¼ÆÊıÖµĞ¡ÓÚCCR1_ValÊ±Îª¸ßµçÆ½*/
-	TIM_OCInitStructure.OCPolarity = TIM_OCPOLARITY_HIGH;
-	/*ÉèÖÃ»¥²¹Í¨µÀÊä³öµÄ¼«ĞÔ*/
-	TIM_OCInitStructure.OCNPolarity = TIM_OCNPOLARITY_LOW;
-	/*¿ìËÙÄ£Ê½ÉèÖÃ*/
-	TIM_OCInitStructure.OCFastMode = TIM_OCFAST_DISABLE;
-	/*¿ÕÏĞµçÆ½*/
-	TIM_OCInitStructure.OCIdleState = TIM_OCIDLESTATE_RESET;
-	/*»¥²¹Í¨µÀÉèÖÃ*/
+	/*PWMæ¨¡å¼é…ç½®--è¿™é‡Œé…ç½®ä¸ºè¾“å‡ºæ¯”è¾ƒæ¨¡å¼*/
+	TIM_OCInitStructure.OCMode       = TIM_OCMODE_TOGGLE;
+	/*æ¯”è¾ƒè¾“å‡ºçš„è®¡æ•°å€¼*/
+	TIM_OCInitStructure.Pulse        = 20;
+	/*å½“å®šæ—¶å™¨è®¡æ•°å€¼å°äºCCR1_Valæ—¶ä¸ºé«˜ç”µå¹³*/
+	TIM_OCInitStructure.OCPolarity   = TIM_OCPOLARITY_HIGH;
+	/*è®¾ç½®äº’è¡¥é€šé“è¾“å‡ºçš„ææ€§*/
+	TIM_OCInitStructure.OCNPolarity  = TIM_OCNPOLARITY_LOW;
+	/*å¿«é€Ÿæ¨¡å¼è®¾ç½®*/
+	TIM_OCInitStructure.OCFastMode   = TIM_OCFAST_DISABLE;
+	/*ç©ºé—²ç”µå¹³*/
+	TIM_OCInitStructure.OCIdleState  = TIM_OCIDLESTATE_RESET;
+	/*äº’è¡¥é€šé“è®¾ç½®*/
 	TIM_OCInitStructure.OCNIdleState = TIM_OCNIDLESTATE_RESET;
 	
 	HAL_TIM_OC_ConfigChannel(&TIM2_Handler,&TIM_OCInitStructure,TIM_CHANNEL_1);
 	
 	HAL_TIM_Base_Stop(&TIM2_Handler);
-	//ÉèÖÃÇÀÕ¼ÓÅÏÈ¼¶£¬×ÓÓÅÏÈ¼¶
+	//è®¾ç½®æŠ¢å ä¼˜å…ˆçº§ï¼Œå­ä¼˜å…ˆçº§
 	HAL_NVIC_SetPriority(TIM2_IRQn, 3, 0);
-	// ÉèÖÃÖĞ¶ÏÀ´Ô´
+	// è®¾ç½®ä¸­æ–­æ¥æº
 	HAL_NVIC_EnableIRQ(TIM2_IRQn);		
 }
 
-//TIM2³õÊ¼»¯   µç»úM04 Í¨µÀ1  M05-> Í¨µÀ2  M07-> Í¨µÀ3
+//TIM2åˆå§‹åŒ–   ç”µæœºM04 é€šé“1  M05-> é€šé“2  M07-> é€šé“3
 void Motor_TIM3_Init(uint16_t psc,uint16_t arr)
 {
 	TIM_OC_InitTypeDef TIM_OCInitStructure;
-	/*Ê¹ÄÜ¶¨Ê±Æ÷4*/
+	/*ä½¿èƒ½å®šæ—¶å™¨4*/
 	__TIM3_CLK_ENABLE();
 	
-	TIM3_Handler.Instance=TIM3; 	                       	
-	TIM3_Handler.Init.Prescaler=psc;                        	
-	TIM3_Handler.Init.CounterMode=TIM_COUNTERMODE_UP;      
-	TIM3_Handler.Init.Period=arr;                          
-	TIM3_Handler.Init.ClockDivision=TIM_CLOCKDIVISION_DIV1; 
+	TIM3_Handler.Instance           =  TIM3; 	                       	
+	TIM3_Handler.Init.Prescaler     =  psc;                        	
+	TIM3_Handler.Init.CounterMode   =  TIM_COUNTERMODE_UP;      
+	TIM3_Handler.Init.Period        =  arr;                          
+	TIM3_Handler.Init.ClockDivision =  TIM_CLOCKDIVISION_DIV1; 
 	TIM3_Handler.Init.RepetitionCounter = 0;
 	HAL_TIM_OC_Init(&TIM3_Handler);
 	
-	/*PWMÄ£Ê½ÅäÖÃ--ÕâÀïÅäÖÃÎªÊä³ö±È½ÏÄ£Ê½*/
-	TIM_OCInitStructure.OCMode = TIM_OCMODE_TOGGLE;
-	/*±È½ÏÊä³öµÄ¼ÆÊıÖµ*/
-	TIM_OCInitStructure.Pulse=20;
-	/*µ±¶¨Ê±Æ÷¼ÆÊıÖµĞ¡ÓÚCCR1_ValÊ±Îª¸ßµçÆ½*/
-	TIM_OCInitStructure.OCPolarity = TIM_OCPOLARITY_HIGH;
-	/*ÉèÖÃ»¥²¹Í¨µÀÊä³öµÄ¼«ĞÔ*/
-	TIM_OCInitStructure.OCNPolarity = TIM_OCNPOLARITY_LOW;
-	/*¿ìËÙÄ£Ê½ÉèÖÃ*/
-	TIM_OCInitStructure.OCFastMode = TIM_OCFAST_DISABLE;
-	/*¿ÕÏĞµçÆ½*/
-	TIM_OCInitStructure.OCIdleState = TIM_OCIDLESTATE_RESET;
-	/*»¥²¹Í¨µÀÉèÖÃ*/
+	/*PWMæ¨¡å¼é…ç½®--è¿™é‡Œé…ç½®ä¸ºè¾“å‡ºæ¯”è¾ƒæ¨¡å¼*/
+	TIM_OCInitStructure.OCMode       = TIM_OCMODE_TOGGLE;
+	/*æ¯”è¾ƒè¾“å‡ºçš„è®¡æ•°å€¼*/
+	TIM_OCInitStructure.Pulse        = 20;
+	/*å½“å®šæ—¶å™¨è®¡æ•°å€¼å°äºCCR1_Valæ—¶ä¸ºé«˜ç”µå¹³*/
+	TIM_OCInitStructure.OCPolarity   = TIM_OCPOLARITY_HIGH;
+	/*è®¾ç½®äº’è¡¥é€šé“è¾“å‡ºçš„ææ€§*/
+	TIM_OCInitStructure.OCNPolarity  = TIM_OCNPOLARITY_LOW;
+	/*å¿«é€Ÿæ¨¡å¼è®¾ç½®*/
+	TIM_OCInitStructure.OCFastMode   = TIM_OCFAST_DISABLE;
+	/*ç©ºé—²ç”µå¹³*/
+	TIM_OCInitStructure.OCIdleState  = TIM_OCIDLESTATE_RESET;
+	/*äº’è¡¥é€šé“è®¾ç½®*/
 	TIM_OCInitStructure.OCNIdleState = TIM_OCNIDLESTATE_RESET;
 	
 	HAL_TIM_OC_ConfigChannel(&TIM3_Handler,&TIM_OCInitStructure,TIM_CHANNEL_1);
 	
 	HAL_TIM_Base_Stop(&TIM3_Handler);
-	//ÉèÖÃÇÀÕ¼ÓÅÏÈ¼¶£¬×ÓÓÅÏÈ¼¶
+	//è®¾ç½®æŠ¢å ä¼˜å…ˆçº§ï¼Œå­ä¼˜å…ˆçº§
 	HAL_NVIC_SetPriority(TIM3_IRQn, 3, 1);
-	// ÉèÖÃÖĞ¶ÏÀ´Ô´
+	// è®¾ç½®ä¸­æ–­æ¥æº
 	HAL_NVIC_EnableIRQ(TIM3_IRQn);		
 }
 
 /***************************
-*@brief		µç»úÏà¹Ø³õÊ¼»¯
-*@param		ÎŞ
-*@return	ÎŞ
+*@brief		ç”µæœºç›¸å…³åˆå§‹åŒ–
+*@param		æ— 
+*@return	æ— 
 ***************************/
 void Motor_Init(void)
 {

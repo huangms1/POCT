@@ -129,4 +129,12 @@
 ..\obj\bsp_motor_conf.o: ..\MALLOC\malloc.h
 ..\obj\bsp_motor_conf.o: ..\HARDWARE\TimBase\bsp_TiMbase.h
 ..\obj\bsp_motor_conf.o: ..\HARDWARE\adc\ADS8688_conf.h
+..\obj\bsp_motor_conf.o: ..\HARDWARE\laser\laser.h
+..\obj\bsp_motor_conf.o: ..\HARDWARE\I2C_EEPROM\bsp_i2c_gpio.h
+..\obj\bsp_motor_conf.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\inttypes.h
+..\obj\bsp_motor_conf.o: ..\HARDWARE\PAC9535\pac9535.h
+..\obj\bsp_motor_conf.o: ..\HARDWARE\PAC9535\DIV_Control.h
+..\obj\bsp_motor_conf.o: ..\TIMER\mytimer.h
+..\obj\bsp_motor_conf.o: ..\HARDWARE\PID\fuzzypid.h
+..\obj\bsp_motor_conf.o: ..\HARDWARE\UltraSound\UltraSound.h
 ..\obj\bsp_motor_conf.o: ..\USER\stm32f4xx_it.h

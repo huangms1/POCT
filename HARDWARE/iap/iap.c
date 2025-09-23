@@ -144,8 +144,8 @@ int STMFLASH_Write(uint32_t WriteAddr,uint32_t *pBuffer,uint32_t NumToWrite)
  * to the flash memory and clears it for the next set of data.
  *
  * @param appxaddr 应用程序的起始地址。
- * @param appbuf 应用程序CODE. 
- * @param appsize 应用程序大小(字节). 
+ * @param appbuf   应用程序CODE. 
+ * @param appsize  应用程序大小(字节). 
  */
 void iap_write_appbin(u32 appxaddr,u8 *appbuf,u32 appsize) 
 {  

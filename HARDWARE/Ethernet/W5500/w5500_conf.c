@@ -459,7 +459,7 @@ void ntp_timer_init(void)
 }
 
 /**
-*@brief		定时器2中断函数
+*@brief		定时器5中断函数
 *@param		无
 *@return	无
 */

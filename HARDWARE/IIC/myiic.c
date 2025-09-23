@@ -1,9 +1,6 @@
 #include "myiic.h"
 #include "delay.h"
-//////////////////////////////////////////////////////////////////////////////////	 
-								  
-////////////////////////////////////////////////////////////////////////////////// 	
-
+	
 //IIC初始化
 void IIC_Init(void)
 {
@@ -12,14 +9,14 @@ void IIC_Init(void)
     __HAL_RCC_GPIOH_CLK_ENABLE();   //使能GPIOH时钟
     
     //PH4,5初始化设置
-    GPIO_Initure.Pin=GPIO_PIN_4|GPIO_PIN_5;
-    GPIO_Initure.Mode=GPIO_MODE_OUTPUT_PP;  //推挽输出
-    GPIO_Initure.Pull=GPIO_PULLUP;          //上拉
-    GPIO_Initure.Speed=GPIO_SPEED_FAST;     //快速
+    GPIO_Initure.Pin   = GPIO_PIN_4|GPIO_PIN_5;
+    GPIO_Initure.Mode  = GPIO_MODE_OUTPUT_PP;  //推挽输出
+    GPIO_Initure.Pull  = GPIO_PULLUP;          //上拉
+    GPIO_Initure.Speed = GPIO_SPEED_FAST;     //快速
     HAL_GPIO_Init(GPIOH,&GPIO_Initure);
     
-    IIC_SDA=1;
-    IIC_SCL=1;  
+    IIC_SDA = 1;
+    IIC_SCL = 1;  
 }
 
 //产生IIC起始信号

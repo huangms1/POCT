@@ -5,9 +5,9 @@
 #include "semphr.h"
 
 //任务优先级
-#define START_TASK_PRIO		4
+#define START_TASK_PRIO		5
 //任务堆栈大小	
-#define START_STK_SIZE 		128  
+#define START_STK_SIZE 		512  
 //任务句柄
 extern TaskHandle_t StartTask_Handler;
 //任务函数

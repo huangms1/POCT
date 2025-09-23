@@ -23,9 +23,9 @@ void WriteFreeLog(const char * pFormat,...);
 #include "task.h"
 
 //任务优先级
-#define LOG_TASK_PRIO		5
+#define LOG_TASK_PRIO		6
 //任务堆栈大小	
-#define LOG_STK_SIZE 		512  
+#define LOG_STK_SIZE 		256  
 //任务句柄
 extern TaskHandle_t LogTask_Handler;
 

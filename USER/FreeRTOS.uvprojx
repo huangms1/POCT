@@ -189,7 +189,7 @@
             <hadIRAM2>1</hadIRAM2>
             <hadIROM2>0</hadIROM2>
             <StupSel>8</StupSel>
-            <useUlib>0</useUlib>
+            <useUlib>1</useUlib>
             <EndSel>0</EndSel>
             <uLtcg>0</uLtcg>
             <nSecure>0</nSecure>
@@ -276,7 +276,7 @@
               <OCR_RVCT4>
                 <Type>1</Type>
                 <StartAddress>0x8010000</StartAddress>
-                <Size>0x30000</Size>
+                <Size>0x50000</Size>
               </OCR_RVCT4>
               <OCR_RVCT5>
                 <Type>1</Type>
@@ -325,7 +325,7 @@
             <wLevel>2</wLevel>
             <uThumb>0</uThumb>
             <uSurpInc>0</uSurpInc>
-            <uC99>0</uC99>
+            <uC99>1</uC99>
             <uGnu>0</uGnu>
             <useXO>0</useXO>
             <v6Lang>1</v6Lang>
@@ -337,9 +337,9 @@
             <v6Rtti>0</v6Rtti>
             <VariousControls>
               <MiscControls></MiscControls>
-              <Define>USE_HAL_DRIVER,STM32F429xx,LOG_ENABLE</Define>
+              <Define>USE_HAL_DRIVER,STM32F429xx</Define>
               <Undefine></Undefine>
-              <IncludePath>..\CORE;..\OBJ;..\USER;..\HALLIB\STM32F4xx_HAL_Driver\Inc;..\SYSTEM\delay;..\SYSTEM\sys;..\SYSTEM\usart;..\HARDWARE\LED;..\HARDWARE\KEY;..\HARDWARE\TIMER;..\HARDWARE\IIC;..\FreeRTOS\include;..\FreeRTOS\portable\RVDS\ARM_CM4F;..\MALLOC;..\HARDWARE\I2C_EEPROM;..\HARDWARE\Ethernet\Internet;..\HARDWARE\Ethernet\W5500;..\HARDWARE\TimBase;..\HARDWARE\adc;..\HARDWARE\PWM;..\HARDWARE\PID;..\HARDWARE\motor;.\APP;..\PROTOCOL\include;..\PUBLIC\include;..\STRUCTURE\include;..\APP_OBJECTS\include;..\TASK\include;..\HARDWARE\iap;..\INSTRUMENTS\include;..\INSTRUMENTS\source;..\MEM\include;..\HARDWARE\PAC9535;..\TIMER</IncludePath>
+              <IncludePath>..\CORE;..\OBJ;..\USER;..\HALLIB\STM32F4xx_HAL_Driver\Inc;..\SYSTEM\delay;..\SYSTEM\sys;..\SYSTEM\usart;..\HARDWARE\LED;..\HARDWARE\KEY;..\HARDWARE\TIMER;..\HARDWARE\IIC;..\FreeRTOS\include;..\FreeRTOS\portable\RVDS\ARM_CM4F;..\MALLOC;..\HARDWARE\I2C_EEPROM;..\HARDWARE\Ethernet\Internet;..\HARDWARE\Ethernet\W5500;..\HARDWARE\TimBase;..\HARDWARE\adc;..\HARDWARE\PWM;..\HARDWARE\PID;..\HARDWARE\motor;.\APP;..\PROTOCOL\include;..\PUBLIC\include;..\STRUCTURE\include;..\APP_OBJECTS\include;..\TASK\include;..\HARDWARE\iap;..\INSTRUMENTS\include;..\INSTRUMENTS\source;..\MEM\include;..\HARDWARE\PAC9535;..\TIMER;..\HARDWARE\laser;..\HARDWARE\UltraSound</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -727,6 +727,26 @@
               <FileName>ADS8688_conf.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\HARDWARE\adc\ADS8688_conf.h</FilePath>
+            </File>
+            <File>
+              <FileName>laser.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\HARDWARE\laser\laser.c</FilePath>
+            </File>
+            <File>
+              <FileName>laser.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\HARDWARE\laser\laser.h</FilePath>
+            </File>
+            <File>
+              <FileName>UltraSound.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\HARDWARE\UltraSound\UltraSound.c</FilePath>
+            </File>
+            <File>
+              <FileName>UltraSound.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\HARDWARE\UltraSound\UltraSound.h</FilePath>
             </File>
             <File>
               <FileName>fuzzypid.c</FileName>

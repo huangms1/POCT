@@ -39,6 +39,13 @@ extern EventGroupHandle_t ledEventGroupHandle;
 #define ERROR_LED                 PFout(15)
 #define END_LED                   PEout(9)
 
+/****************************激光头***********************************/
+#define JG_LED_CLK_ENABLE()    __HAL_RCC_GPIOA_CLK_ENABLE();
+#define JG_LED_PORT            GPIOA
+#define JG_LED_PIN             GPIO_PIN_8
+
+#define JG_LED             PAout(8)
+
 
 /***************  LED灯亮度控制********************************
 CLK	PB13	
@@ -73,6 +80,7 @@ CS	PC2
 #define LED_SPI_CS             PCout(2)
 #define LED1_SPI_CS            PAout(1)
 
+void JG_init(void);
 void LED_Init(void);
 void ALL_LED_OFF(void);
 void LED_SPI_SendData(uint8_t num ,uint8_t data);

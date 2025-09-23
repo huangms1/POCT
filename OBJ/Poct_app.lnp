@@ -54,6 +54,8 @@
 "..\obj\div_control.o"
 "..\obj\pac9535.o"
 "..\obj\ads8688.o"
+"..\obj\laser.o"
+"..\obj\ultrasound.o"
 "..\obj\fuzzypid.o"
 "..\obj\croutine.o"
 "..\obj\event_groups.o"
@@ -97,7 +99,7 @@
 "..\obj\poct_hmn_h2l8_a.o"
 "..\obj\zmem.o"
 "..\obj\mytimer.o"
---strict --scatter "..\OBJ\Poct_app.sct"
+--library_type=microlib --strict --scatter "..\OBJ\Poct_app.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers
 --list "..\OBJ\Poct_app.map" -o ..\OBJ\Poct_app.axf

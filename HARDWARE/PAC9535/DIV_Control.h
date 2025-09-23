@@ -75,7 +75,7 @@ void pac9535_set_configuration_registers(uint8_t addr,uint16_t data,uint8_t port
 
 void motor_div_init(void);
 
-void set_motor_div(uint8_t motor_num, uint8_t div);
+void set_motor_div(uint8_t pac9535_addr,uint16_t IOport, uint8_t div,uint8_t shift,uint8_t port);
 
 #endif
 

@@ -5,11 +5,11 @@
 #define POCT_ANM_H1L4_A 
 
 //bootloader 引导程序此处设置为        1 
-#define IS_BOOTLOADER_PROGRAM        0
+#define IS_BOOTLOADER_PROGRAM          0
 
 #if defined POCT_ANM_H1L4_A
 	#include "POCT_ANM_H1L4_A.h"
-	#define  INSTRUMENTS_VERSION   "@S_POCT_ANM_H1L4_A_V1.0.0.VT06.Beta.20240827_E@"
+	#define  INSTRUMENTS_VERSION   "@S_POCT_ANM_H1L8_A_V1.0.0.VT10.Beta.20250923_E@"
 	
 #elif defined POCT_HMN_H2L8_A
 	#include "POCT_HMN_H2L8_A.h"

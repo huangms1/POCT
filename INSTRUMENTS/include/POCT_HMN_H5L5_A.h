@@ -42,7 +42,7 @@ extern Motor_Conf_TypeDef Motor_Conf[MOTOR_CONF_NUM];
 #define M01_FRE        1000    
 #define M02_FRE        1000     
 #define M03_FRE        500   
-#define M04_FRE        1000
+#define M04_FRE        700
 #define M05_FRE        500     
 #define M06_FRE        500    
 #define M07_FRE        1000     

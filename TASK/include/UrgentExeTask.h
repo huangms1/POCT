@@ -5,9 +5,9 @@
 #include "FreeRTOS.h"
 #include "task.h"
 
-#define URGENT_EXE_STK_SIZE  					  128
+#define URGENT_EXE_STK_SIZE  					  512
 
-//ÈÎÎñÓÅÏÈ¼¶
+//ä»»åŠ¡ä¼˜å…ˆçº§
 #define URGENT_EXE_TASK_PRIO		              7
 
 extern TaskHandle_t Urgent_EXE_Task_Handler;

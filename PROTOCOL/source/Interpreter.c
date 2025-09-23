@@ -133,8 +133,7 @@ bool InterpreteAppMsg(SMsg * pMsg)
 		
 		memcpy(*ppDest,pSource,iBytes);
 	}
-	return true;
-	
+	return true;	
 };
 
 

@@ -38,21 +38,21 @@ void ADS8688_GPIO_Init(void)
 	HAL_GPIO_Init(ADS8688_SPIx_SCK_GPIO_PORT, &GPIO_InitStruct);
 
 	/* SPI MISO GPIO pin configuration  */
-	GPIO_InitStruct.Pin = ADS8688_SPIx_MISO_PIN;
+	GPIO_InitStruct.Pin       = ADS8688_SPIx_MISO_PIN;
 	GPIO_InitStruct.Alternate = ADS8688_SPIx_MISO_AF;
 
 	HAL_GPIO_Init(ADS8688_SPIx_MISO_GPIO_PORT, &GPIO_InitStruct);
 
 	/* SPI MOSI GPIO pin configuration  */
-	GPIO_InitStruct.Pin = ADS8688_SPIx_MOSI_PIN;
+	GPIO_InitStruct.Pin       = ADS8688_SPIx_MOSI_PIN;
 	GPIO_InitStruct.Alternate = ADS8688_SPIx_MISO_AF;  
 	HAL_GPIO_Init(ADS8688_SPIx_MOSI_GPIO_PORT, &GPIO_InitStruct);   
 
-	GPIO_InitStruct.Pin = ADS8688_SPIx_SCS ;
+	GPIO_InitStruct.Pin  = ADS8688_SPIx_SCS ;
 	GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
 	HAL_GPIO_Init(ADS8688_SPIx_SCS_PORT, &GPIO_InitStruct); 
 
-	GPIO_InitStruct.Pin = ADS8688_RESET_PIN ;
+	GPIO_InitStruct.Pin  = ADS8688_RESET_PIN ;
 	GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
 	HAL_GPIO_Init(ADS8688_SPIx_RESET_PORT, &GPIO_InitStruct); 
 }
@@ -72,18 +72,18 @@ void MX_SPI4_Init(void)
 		
 	/*##-1- Configure the SPI peripheral #######################################*/
 	/* Set the SPI parameters */
-	ADS8688_SPI_Handle.Instance = SPI4;
-	ADS8688_SPI_Handle.Init.Mode = SPI_MODE_MASTER;
-	ADS8688_SPI_Handle.Init.Direction = SPI_DIRECTION_2LINES;
-	ADS8688_SPI_Handle.Init.DataSize = SPI_DATASIZE_8BIT;
-	ADS8688_SPI_Handle.Init.CLKPolarity = SPI_POLARITY_LOW;
-	ADS8688_SPI_Handle.Init.CLKPhase = SPI_PHASE_1EDGE;
-	ADS8688_SPI_Handle.Init.NSS = SPI_NSS_SOFT;
+	ADS8688_SPI_Handle.Instance               = SPI4;
+	ADS8688_SPI_Handle.Init.Mode              = SPI_MODE_MASTER;
+	ADS8688_SPI_Handle.Init.Direction         = SPI_DIRECTION_2LINES;
+	ADS8688_SPI_Handle.Init.DataSize          = SPI_DATASIZE_8BIT;
+	ADS8688_SPI_Handle.Init.CLKPolarity       = SPI_POLARITY_LOW;
+	ADS8688_SPI_Handle.Init.CLKPhase          = SPI_PHASE_1EDGE;
+	ADS8688_SPI_Handle.Init.NSS               = SPI_NSS_SOFT;
 	ADS8688_SPI_Handle.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_8;
-	ADS8688_SPI_Handle.Init.FirstBit = SPI_FIRSTBIT_MSB;
-	ADS8688_SPI_Handle.Init.TIMode = SPI_TIMODE_DISABLE;
-	ADS8688_SPI_Handle.Init.CRCCalculation = SPI_CRCCALCULATION_DISABLE;
-	ADS8688_SPI_Handle.Init.CRCPolynomial = 10;
+	ADS8688_SPI_Handle.Init.FirstBit          = SPI_FIRSTBIT_MSB;
+	ADS8688_SPI_Handle.Init.TIMode            = SPI_TIMODE_DISABLE;
+	ADS8688_SPI_Handle.Init.CRCCalculation    = SPI_CRCCALCULATION_DISABLE;
+	ADS8688_SPI_Handle.Init.CRCPolynomial     = 10;
 
 	if (HAL_SPI_Init(&ADS8688_SPI_Handle) != HAL_OK)
 	{
@@ -100,10 +100,10 @@ void MX_SPI4_Init(void)
 **********************************************************************************************************/
 void ADS8688_IO_Init(void) //ADS8688 IO口初始化
 {
-	HAL_Delay(20);
+	delay_ms(20);
 	CS_H;
 	RST_H;
-	HAL_Delay(5);
+	delay_ms(5);
 }
 /**********************************************************************************************************
 *	函 数 名: ADS8688_Init
@@ -114,16 +114,16 @@ void ADS8688_IO_Init(void) //ADS8688 IO口初始化
 void ADS8688_Init(uint8_t ch_en) //ADS8688初始化
 {
 	ADS8688_IO_Init();
-	SOFT_RESET();                                 //软件复位
-	HAL_Delay(5);                                 //手册上没找到具体的，基本上是ns级，这里设置1ms
-	Set_Auto_Scan_Sequence(ch_en);                //使能通道
-	ADS8688_WriteReg(CH_PD, ~ch_en);              //通道退出低功耗状态 通道上电
-	HAL_Delay(20);                                //手册上说退出低功耗至少15ms
+	SOFT_RESET();                                //软件复位
+	delay_ms(5);                                 //手册上没找到具体的，基本上是ns级，这里设置1ms
+	Set_Auto_Scan_Sequence(ch_en);               //使能通道
+	ADS8688_WriteReg(CH_PD, ~ch_en);             //通道退出低功耗状态 通道上电
+	delay_ms(10);                                //手册上说退出低功耗至少15ms
 	while (ADS8688_ReadReg(AUTO_SEQ_EN) != ch_en) //是否使能成功
 	{
 		Set_Auto_Scan_Sequence(ch_en);   //使能通道
 		ADS8688_WriteReg(CH_PD, ~ch_en); //通道退出低功耗状态 通道上电
-		HAL_Delay(20);
+		delay_ms(10);
 	}
 }
 
@@ -157,7 +157,7 @@ void ADS8688_SPI_Write8Bit(uint8_t data)
 *	形    参:  cmd : 命令
 *	返 回 值: 无
 **********************************************************************************************************/
-void ADS8688_WriteCmd(uint16_t cmd) //写ADS8688命令寄存器
+void ADS8688_WriteCmd(uint16_t cmd) 
 {
 	CS_L;
 	ADS8688_SPI_Write8Bit(cmd >> 8 & 0XFF);
@@ -175,7 +175,7 @@ void ADS8688_WriteCmd(uint16_t cmd) //写ADS8688命令寄存器
 *	返 回 值: 无
 *********************************************************************************************************
 */
-void SOFT_RESET(void) //软件复位
+void SOFT_RESET(void) 
 {
 	ADS8688_WriteCmd(RST);
 }
@@ -186,7 +186,7 @@ void SOFT_RESET(void) //软件复位
 *	形    参: 无
 *	返 回 值: 无
 **********************************************************************************************************/
-void AUTO_RST_Mode(void) //自动扫描模式
+void AUTO_RST_Mode(void) 
 {
 	ADS8688_WriteCmd(AUTO_RST);
 }
@@ -196,7 +196,7 @@ void AUTO_RST_Mode(void) //自动扫描模式
 *	形    参:  ch : 要选择的通道
 *	返 回 值: 无
 **********************************************************************************************************/
-void MAN_CH_Mode(uint16_t ch) //手动模式
+void MAN_CH_Mode(uint16_t ch) 
 {
 	ADS8688_WriteCmd(ch);
 }
@@ -291,4 +291,16 @@ uint16_t Get_MAN_CH_Mode_Data(void)
 	CS_H;
 	return (datah << 8 | datal);
 }
+
+/**
+ * @brief 初始化 ADC 设备
+ */
+//void ADS8688_init(void) {
+//	ADS8688_GPIO_Init();
+//    ADS8688_Init(CH0_EN | CH1_EN | CH2_EN | CH7_EN);
+//    Set_CH_Range(CHIR_0, ADS8688_IR_1_25V);
+//    Set_CH_Range(CHIR_1, ADS8688_IR_1_25V);
+//    Set_CH_Range(CHIR_2, ADS8688_IR_1_25V);
+//    Set_CH_Range(CHIR_7, ADS8688_IR_1_25V);
+//}
 

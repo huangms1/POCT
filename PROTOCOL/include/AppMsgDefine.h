@@ -191,7 +191,7 @@ typedef enum {
 
 #define MAIN_PARA_LED_CY5                                                            "CY5"
 
-#define MAIN_PARA_LED_CY5DOT5                                                         "CY5.5"
+#define MAIN_PARA_LED_QUAS705                                                        "QUAS705"
 
 #define MAIN_PARA_LED_HEX                                                            "HEX"
 
@@ -199,7 +199,9 @@ typedef enum {
 
 #define MAIN_PARA_LED_ATTO                                                           "ATTO"
 
-#define MAIN_PARA_LED_AMCA                                                           "AMCA"
+#define MAIN_PARA_LED_AF405                                                          "AF405"
+
+
 
 /****************锟斤拷锟斤拷********************/
 
