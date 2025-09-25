@@ -1030,8 +1030,7 @@ bool App_NZL(SMsg *pMsg, int *pFaultCode)
   * @retval 无
   *********************************************/
 bool App_YBX(SMsg *pMsg, int *pFaultCode)
-{
-	
+{	
 	uint16_t SendT2T3buf[4] = {0};
     uint16_t countdown = 0;
     uint32_t TimeNowCnt = 0;
