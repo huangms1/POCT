@@ -1,2 +1,0 @@
-# POCT
-POCT软件
