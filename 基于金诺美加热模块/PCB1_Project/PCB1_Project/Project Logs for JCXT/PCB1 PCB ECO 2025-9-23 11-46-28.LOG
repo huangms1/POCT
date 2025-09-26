@@ -1,0 +1,173 @@
+Change Component DesignItemId : Designator=C62 Old DesignItemId=10uF/16V,CASE-A_3216 New DesignItemId=10uF/16V,CASE-A_3216 
+Change Component DesignItemId : Designator=C71 Old DesignItemId=10uF/16V,CASE-A_3216 New DesignItemId=10uF/16V,CASE-A_3216 
+Change Component DesignItemId : Designator=C72 Old DesignItemId=10uF/16V,CASE-A_3216 New DesignItemId=10uF/16V,CASE-A_3216 
+Change Component DesignItemId : Designator=C73 Old DesignItemId=10uF/16V,CASE-A_3216 New DesignItemId=10uF/16V,CASE-A_3216 
+Change Component DesignItemId : Designator=C85 Old DesignItemId=10uF/16V,CASE-A_3216 New DesignItemId=10uF/16V,CASE-A_3216 
+Change Component DesignItemId : Designator=C118 Old DesignItemId=10uF/16V,CASE-A_3216 New DesignItemId=10uF/16V,CASE-A_3216 
+Change Component Description : Designator=U40 Old Description=仪表放大器；（可替代芯片AD623ARZ-R7）单路；共模抑制比(CMRR) 80dB；输入偏置电流(Ib) 25nA；输入失调电压(Vos) 25uV；压摆率(SR) 0.3V/us；带宽(-3db) 800kHz；轨到轨 轨到轨输出；每个通道工作电流 305uA、375uA；输入失调电压温漂(Vos TC New Description=仪表放大器；（可替代芯片AD623ARZ-R7）单路；共模抑制比(CMRR) 80dB；输入偏置电流(Ib) 25nA；输入失调电压(Vos) 25uV；压摆率(SR) 0.3V/us；带宽(-3db) 800kHz；轨到轨 轨到轨输出；每个通道工作电流 305uA、375uA；输入失调电压温漂(Vos TC) 0.1uV/℃；工作电压 2.5V~6V；2.7V~12V
+Change Component Description : Designator=Q1 Old Description=场效应管(MOSFET)；漏源电压(Vdss) 30V；连续漏极电流(Id) 5.8A；导通电阻(RDS(on)) 41mΩ@10V,5.8A；耗散功率(Pd) 1.4W；阈值电压(Vgs(th)) 1.4V；栅极电荷量(Qg) 9.5nC@15V；输入电容(Ciss@Vds) 820pF@15V；反向传输电容 New Description=场效应管(MOSFET)；漏源电压(Vdss) 30V；连续漏极电流(Id) 5.8A；导通电阻(RDS(on)) 41mΩ@10V,5.8A；耗散功率(Pd) 1.4W；阈值电压(Vgs(th)) 1.4V；栅极电荷量(Qg) 9.5nC@15V；输入电容(Ciss@Vds) 820pF@15V；反向传输电容(Crss) 77pF
+Change Component Description : Designator=U17 Old Description=转换器/电平移位器；通道类型 双向；工作电压(VCCA) 1.5V~5.5V；工作电压(VCCB) 1.5V~3.6V； 通道数 1；
+每个电路通道数 8；输出类型 New Description=转换器/电平移位器；通道类型 双向；工作电压(VCCA) 1.5V~5.5V；工作电压(VCCB) 1.5V~3.6V； 通道数 1；
+每个电路通道数 8；输出类型 三态
+Change component parameters: Designator = "U6"; Footprint = "SOIC-16_L9.9-W3.9-P1.27-LS6.0-BL"; UniqueID = "\ABQTBUHX"
+Change component parameters. Clean all parameters for all variants
+Change component parameters (AddParameter): Name = "Add into BOM"; Value = "yes"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "charge pump"; Value = "有"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Convert to PCB"; Value = "yes"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Data Rate"; Value = "235Kbps"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Datasheet"; Value = "https://item.szlcsc.com/datasheet/MAX3232ESE%252B/154766.html"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Device"; Value = "MAX3232ESE+"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "ESD Protect"; Value = "±15kV"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "JLCPCB Part Class"; Value = "Extended Part"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "LCSC Part Name"; Value = "MAX3222/MAX3232/MAX3237/MAX3241 3.0V 至 5.5V，低功耗，最高 1Mbps，真正的 RS-232 收发器使用四个 0.1uF 外部电容"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Manufacturer"; Value = "ADI(亚德诺)/MAXIM(美信)"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Manufacturer Part"; Value = "MAX3232ESE+"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Number of Drivers"; Value = "2"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Number of Receivers"; Value = "2"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Operating Temperature"; Value = "-40℃~+85℃"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Supplier"; Value = "LCSC"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Supplier Footprint"; Value = "SOIC-16"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Supplier Part"; Value = "C143435"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Symbol"; Value = "MAX3232ESE+"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Type"; Value = "收发器"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Voltage - Supply"; Value = "3V~5.5V"; VariantName = "[No Variations]"
+Change component parameters: Designator = "D2"; Footprint = "SMB_L4.4-W3.6-LS5.3-RD"; UniqueID = "\XWNMAJPM"
+Change component parameters. Clean all parameters for all variants
+Change component parameters (AddParameter): Name = "Add into BOM"; Value = "yes"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Channel ID"; Value = ""; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Convert to PCB"; Value = "yes"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Current - Rectified"; Value = "10A"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Datasheet"; Value = "https://atta.szlcsc.com/upload/public/pdf/source/20240617/4C132C80E36BDBE9AB2C039856844535.pdf"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Device"; Value = "SS1045-SMB"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Diode Configuration"; Value = "独立式"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Group ID"; Value = ""; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "JLCPCB Part Class"; Value = "扩展库"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "LCSC Part Name"; Value = "电压:45V 电流:10A"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Manufacturer"; Value = "GOODWORK(固得沃克)"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Manufacturer Part"; Value = "SS1045-SMB"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Reuse Block"; Value = ""; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Reverse Leakage Current (Ir)"; Value = "100nA"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Supplier"; Value = "LCSC"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Supplier Footprint"; Value = "SMB(DO-214AA)"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Supplier Part"; Value = "C2903947"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Symbol"; Value = "SS1045-SMB"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Voltage - DC Reverse(Vr)"; Value = "45V"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Voltage - Forward(Vf@If)"; Value = "550mV@10A"; VariantName = "[No Variations]"
+Change component parameters: Designator = "U2"; Footprint = "TO-263-5_L10.2-W8.9-P1.70-TL"; UniqueID = "\KYHPHHKC"
+Change component parameters. Clean all parameters for all variants
+Change component parameters (AddParameter): Name = "Add into BOM"; Value = "yes"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Channel ID"; Value = ""; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Convert to PCB"; Value = "yes"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Datasheet"; Value = "https://atta.szlcsc.com/upload/public/pdf/source/20250109/4BED35EECA130A9C007A6498C0DD05D8.pdf"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Device"; Value = "XL4015E1"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Frequency - Switching"; Value = "180kHz"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Function"; Value = "降压型"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Group ID"; Value = ""; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "JLCPCB Part Class"; Value = "扩展库"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "LCSC Part Name"; Value = "5A 180KHz 36V 降压型DC-DC转换器"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Manufacturer"; Value = "XLSEMI(芯龙)"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Manufacturer Part"; Value = "XL4015E1"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Number of Outputs"; Value = "1"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Operating Temperature"; Value = "-40℃~+125℃"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Output Current"; Value = "5A"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Output Type"; Value = "可调"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Output Voltage"; Value = "1.25V~32V"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Quiescent Current"; Value = "5mA"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Reuse Block"; Value = ""; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Supplier"; Value = "LCSC"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Supplier Footprint"; Value = "TO-263-5"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Supplier Part"; Value = "C51661"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Switch tube (built-in/external)"; Value = "内置"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Symbol"; Value = "XL4015E1"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Synchronous Rectifier"; Value = "是"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Topology"; Value = "降压式"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Voltage - Supply"; Value = "8V~36V"; VariantName = "[No Variations]"
+Added Component: Designator=C117(C0603)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "ComponentLink1Description"; Value = "供应商链接"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink1URL"; Value = "http://www.szlcsc.com/product/details_16531.html"; VariantName = "[No Variations]"
+Added Component: Designator=R113(R0603)
+Add component. Clean all parameters for all variants
+Added Component: Designator=R125(R0603)
+Add component. Clean all parameters for all variants
+Added Pin To Net: NetName=NetC117_1 Pin=C117-1
+Added Pin To Net: NetName=NetC117_2 Pin=C117-2
+Added Pin To Net: NetName=VOUT_24V Pin=L1-1
+Added Pin To Net: NetName=NetD2_1 Pin=L1-2
+Added Pin To Net: NetName=NetC117_1 Pin=R113-1
+Added Pin To Net: NetName=NetC117_2 Pin=R113-2
+Added Pin To Net: NetName=GND Pin=R125-1
+Added Pin To Net: NetName=NetQ7_3 Pin=R125-2
+Added Member To Class: ClassName=Power Member=Component C1 1uF
+Added Member To Class: ClassName=Power Member=Component C2 1uF
+Added Member To Class: ClassName=Power Member=Component C3 1000uF
+Added Member To Class: ClassName=Power Member=Component C4 470uF/35V
+Added Member To Class: ClassName=Power Member=Component C5 1uF
+Added Member To Class: ClassName=Power Member=Component C6 33nF
+Added Member To Class: ClassName=Power Member=Component C7 10uF/35V
+Added Member To Class: ClassName=Power Member=Component C8 22uF/35V
+Added Member To Class: ClassName=Power Member=Component C9 100nF
+Added Member To Class: ClassName=Power Member=Component C10 100nF
+Added Member To Class: ClassName=Temp Member=Component C11 100nF
+Added Member To Class: ClassName=CAN Member=Component C12 NC
+Added Member To Class: ClassName=CAN Member=Component C13 4.7nF
+Added Member To Class: ClassName=CAN Member=Component C14 100nF
+Added Member To Class: ClassName=CAN Member=Component C15 NC
+Added Member To Class: ClassName=CAN Member=Component C17 100nF
+Added Member To Class: ClassName=RS232 Member=Component C19 100nF
+Added Member To Class: ClassName=RS232 Member=Component C20 100nF
+Added Member To Class: ClassName=RS232 Member=Component C23 100nF
+Added Member To Class: ClassName=RS232 Member=Component C24 100nF
+Added Member To Class: ClassName=RS232 Member=Component C29 100nF
+Added Member To Class: ClassName=USB Member=Component C31 100nF
+Added Member To Class: ClassName=USB Member=Component C33 4.7uF
+Added Member To Class: ClassName=Temp Member=Component C117 100nF
+Added Member To Class: ClassName=Power Member=Component D1 SS54_5A/40V
+Added Member To Class: ClassName=Power Member=Component D2 SS1045-SMB
+Added Member To Class: ClassName=Power Member=Component D3 红灯 0603
+Added Member To Class: ClassName=Power Member=Component D4 SS1045-SMB
+Added Member To Class: ClassName=CAN Member=Component D5 NC
+Added Member To Class: ClassName=CAN Member=Component D6 NC
+Added Member To Class: ClassName=Power Member=Component F1 0466003.NRHF
+Added Member To Class: ClassName=Power Member=Component L1 47uH
+Added Member To Class: ClassName=Power Member=Component PH1 PH2.0-2P
+Added Member To Class: ClassName=CAN Member=Component PH6 PH2.0-2P
+Added Member To Class: ClassName=RS232 Member=Component PH8 PH2.0-3P
+Added Member To Class: ClassName=Power Member=Component Q3 ME15N10
+Added Member To Class: ClassName=Power Member=Component Q8 PMBT3904,215
+Added Member To Class: ClassName=LED Member=Component R18 10kΩ
+Added Member To Class: ClassName=LED Member=Component R19 10kΩ
+Added Member To Class: ClassName=LED Member=Component R20 10kΩ
+Added Member To Class: ClassName=LED Member=Component R21 10kΩ
+Added Member To Class: ClassName=LED Member=Component R22 10kΩ
+Added Member To Class: ClassName=Power Member=Component R23 15kΩ
+Added Member To Class: ClassName=Power Member=Component R24 825Ω
+Added Member To Class: ClassName=Power Member=Component R25 15kΩ
+Added Member To Class: ClassName=Power Member=Component R26 NC
+Added Member To Class: ClassName=Power Member=Component R27 10kΩ
+Added Member To Class: ClassName=Power Member=Component R28 0Ω
+Added Member To Class: ClassName=Power Member=Component R29 10kΩ
+Added Member To Class: ClassName=Power Member=Component R30 1kΩ
+Added Member To Class: ClassName=Power Member=Component R32 NC
+Added Member To Class: ClassName=Power Member=Component R33 NC
+Added Member To Class: ClassName=Power Member=Component R36 15kΩ
+Added Member To Class: ClassName=Power Member=Component R38 1kΩ
+Added Member To Class: ClassName=Temp Member=Component R42 10kΩ
+Added Member To Class: ClassName=Temp Member=Component R46 10kΩ
+Added Member To Class: ClassName=Temp Member=Component R48 NC
+Added Member To Class: ClassName=Temp Member=Component R49 10kΩ
+Added Member To Class: ClassName=CAN Member=Component R51 30Ω
+Added Member To Class: ClassName=CAN Member=Component R54 30Ω
+Added Member To Class: ClassName=CAN Member=Component R56 120Ω
+Added Member To Class: ClassName=USB Member=Component R58 22Ω
+Added Member To Class: ClassName=USB Member=Component R60 22Ω
+Added Member To Class: ClassName=USB Member=Component R62 22Ω
+Added Member To Class: ClassName=USB Member=Component R63 22Ω
+Added Member To Class: ClassName=Temp Member=Component R113 10kΩ
+Added Member To Class: ClassName=Temp Member=Component R125 NC
+Added Member To Class: ClassName=Power Member=Component U2 XL4015E1
+Added Member To Class: ClassName=Power Member=Component U3 MIC29502WU
+Added Member To Class: ClassName=Temp Member=Component U4 ADS1110A0IDBVR
+Added Member To Class: ClassName=CAN Member=Component U5 SIT1051AT/3
+Added Member To Class: ClassName=RS232 Member=Component U6 MAX3232ESE+
+Added Member To Class: ClassName=USB Member=Component U7 CH340N

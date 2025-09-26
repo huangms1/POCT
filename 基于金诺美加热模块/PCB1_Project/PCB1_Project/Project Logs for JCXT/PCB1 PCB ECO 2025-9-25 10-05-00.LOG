@@ -1,0 +1,4 @@
+Removed Pin From Net: NetName=TX3_232_OUT Pin=PH8-1
+Removed Pin From Net: NetName=DGND Pin=PH8-3
+Added Pin To Net: NetName=DGND Pin=PH8-1
+Added Pin To Net: NetName=TX3_232_OUT Pin=PH8-3

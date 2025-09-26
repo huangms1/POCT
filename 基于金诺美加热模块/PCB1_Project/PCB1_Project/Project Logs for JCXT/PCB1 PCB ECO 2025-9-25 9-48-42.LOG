@@ -1,0 +1,16 @@
+Removed Pin From Net: NetName=VCC_5V Pin=USB1-1
+Removed Pin From Net: NetName=DGND Pin=USB1-4
+Removed Pin From Net: NetName=DGND Pin=USB1-5
+Removed Pin From Net: NetName=DGND Pin=USB1-6
+Removed Member From Class: ClassName=USB Member=USB1
+Added Component: Designator=PH11(PH2.0-4P Õ‰’Î)
+Add component. Clean all parameters for all variants
+Added Pin To Net: NetName=DGND Pin=PH11-1
+Added Pin To Net: NetName=VCC_5V Pin=PH11-4
+Added Pin To Net: NetName=NetPH11_2 Pin=PH11-2
+Added Pin To Net: NetName=NetPH11_2 Pin=R58-1
+Added Net: Name=NetPH11_2
+Added Pin To Net: NetName=NetPH11_3 Pin=PH11-3
+Added Pin To Net: NetName=NetPH11_3 Pin=R60-1
+Added Net: Name=NetPH11_3
+Added Member To Class: ClassName=USB Member=Component PH11 PH2.0-4P

@@ -1,0 +1,37 @@
+Change Component DesignItemId : Designator=C62 Old DesignItemId=10uF/16V,CASE-A_3216 New DesignItemId=10uF/16V,CASE-A_3216 
+Change Component DesignItemId : Designator=C71 Old DesignItemId=10uF/16V,CASE-A_3216 New DesignItemId=10uF/16V,CASE-A_3216 
+Change Component DesignItemId : Designator=C72 Old DesignItemId=10uF/16V,CASE-A_3216 New DesignItemId=10uF/16V,CASE-A_3216 
+Change Component DesignItemId : Designator=C73 Old DesignItemId=10uF/16V,CASE-A_3216 New DesignItemId=10uF/16V,CASE-A_3216 
+Change Component DesignItemId : Designator=C85 Old DesignItemId=10uF/16V,CASE-A_3216 New DesignItemId=10uF/16V,CASE-A_3216 
+Change Component DesignItemId : Designator=C118 Old DesignItemId=10uF/16V,CASE-A_3216 New DesignItemId=10uF/16V,CASE-A_3216 
+Change Component DesignItemId : Designator=C14 Old DesignItemId=100nF/50V,C0402 New DesignItemId=100nF/50V,C0603
+Change Component DesignItemId : Designator=C17 Old DesignItemId=100nF/50V,C0402 New DesignItemId=100nF/50V,C0603
+Change Component Footprint: Designator=C14 Old Footprint=C0402 New Footprint=C0603
+Change Component Footprint: Designator=C17 Old Footprint=C0402 New Footprint=C0603
+Change Component Description : Designator=U40 Old Description=仪表放大器；（可替代芯片AD623ARZ-R7）单路；共模抑制比(CMRR) 80dB；输入偏置电流(Ib) 25nA；输入失调电压(Vos) 25uV；压摆率(SR) 0.3V/us；带宽(-3db) 800kHz；轨到轨 轨到轨输出；每个通道工作电流 305uA、375uA；输入失调电压温漂(Vos TC New Description=仪表放大器；（可替代芯片AD623ARZ-R7）单路；共模抑制比(CMRR) 80dB；输入偏置电流(Ib) 25nA；输入失调电压(Vos) 25uV；压摆率(SR) 0.3V/us；带宽(-3db) 800kHz；轨到轨 轨到轨输出；每个通道工作电流 305uA、375uA；输入失调电压温漂(Vos TC) 0.1uV/℃；工作电压 2.5V~6V；2.7V~12V
+Change Component Description : Designator=Q1 Old Description=场效应管(MOSFET)；漏源电压(Vdss) 30V；连续漏极电流(Id) 5.8A；导通电阻(RDS(on)) 41mΩ@10V,5.8A；耗散功率(Pd) 1.4W；阈值电压(Vgs(th)) 1.4V；栅极电荷量(Qg) 9.5nC@15V；输入电容(Ciss@Vds) 820pF@15V；反向传输电容 New Description=场效应管(MOSFET)；漏源电压(Vdss) 30V；连续漏极电流(Id) 5.8A；导通电阻(RDS(on)) 41mΩ@10V,5.8A；耗散功率(Pd) 1.4W；阈值电压(Vgs(th)) 1.4V；栅极电荷量(Qg) 9.5nC@15V；输入电容(Ciss@Vds) 820pF@15V；反向传输电容(Crss) 77pF
+Change Component Description : Designator=U17 Old Description=转换器/电平移位器；通道类型 双向；工作电压(VCCA) 1.5V~5.5V；工作电压(VCCB) 1.5V~3.6V； 通道数 1；
+每个电路通道数 8；输出类型 New Description=转换器/电平移位器；通道类型 双向；工作电压(VCCA) 1.5V~5.5V；工作电压(VCCB) 1.5V~3.6V； 通道数 1；
+每个电路通道数 8；输出类型 三态
+Change component parameters: Designator = "U6"; Footprint = "SOIC-16_L9.9-W3.9-P1.27-LS6.0-BL"; UniqueID = "\ABQTBUHX"
+Change component parameters. Clean all parameters for all variants
+Change component parameters (AddParameter): Name = "Add into BOM"; Value = "yes"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "charge pump"; Value = "有"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Convert to PCB"; Value = "yes"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Data Rate"; Value = "235Kbps"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Datasheet"; Value = "https://item.szlcsc.com/datasheet/MAX3232ESE%252B/154766.html"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Device"; Value = "MAX3232ESE+"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "ESD Protect"; Value = "±15kV"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "JLCPCB Part Class"; Value = "Extended Part"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "LCSC Part Name"; Value = "MAX3222/MAX3232/MAX3237/MAX3241 3.0V 至 5.5V，低功耗，最高 1Mbps，真正的 RS-232 收发器使用四个 0.1uF 外部电容"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Manufacturer"; Value = "ADI(亚德诺)/MAXIM(美信)"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Manufacturer Part"; Value = "MAX3232ESE+"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Number of Drivers"; Value = "2"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Number of Receivers"; Value = "2"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Operating Temperature"; Value = "-40℃~+85℃"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Supplier"; Value = "LCSC"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Supplier Footprint"; Value = "SOIC-16"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Supplier Part"; Value = "C143435"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Symbol"; Value = "MAX3232ESE+"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Type"; Value = "收发器"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Voltage - Supply"; Value = "3V~5.5V"; VariantName = "[No Variations]"

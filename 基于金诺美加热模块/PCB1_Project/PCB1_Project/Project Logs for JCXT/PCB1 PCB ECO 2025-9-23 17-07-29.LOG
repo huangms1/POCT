@@ -1,0 +1,4 @@
+Removed Pin From Net: NetName=JNM_GDDL Pin=U38-88
+Added Pin To Net: NetName=JNM_GDDL Pin=U38-1
+Added Member To Class: ClassName=Power Member=Component R23 10k¦¸
+Added Member To Class: ClassName=Temp Member=Component R24 0¦¸

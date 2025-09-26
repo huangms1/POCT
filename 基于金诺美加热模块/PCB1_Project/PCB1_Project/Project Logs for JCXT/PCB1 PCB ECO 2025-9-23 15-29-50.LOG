@@ -1,0 +1,41 @@
+Removed Pin From Net: NetName=NetQ1_1 Pin=Q2-3
+Removed Pin From Net: NetName=NetQ7_3 Pin=Q13-1
+Removed Pin From Net: NetName=NetQ1_1 Pin=R90-2
+Added Component: Designator=R124(R0603)
+Add component. Clean all parameters for all variants
+Added Component: Designator=R124(R0603)
+Add component. Clean all parameters for all variants
+Added Pin To Net: NetName=NetQ7_3 Pin=R124-1
+Added Pin To Net: NetName=NetQ1_1 Pin=R124-2
+Added Pin To Net: NetName=NetQ2_3 Pin=Q2-3
+Added Pin To Net: NetName=NetQ2_3 Pin=R90-2
+Added Pin To Net: NetName=NetQ2_3 Pin=R124-1
+Added Net: Name=NetQ2_3
+Added Pin To Net: NetName=NetQ13_1 Pin=Q13-1
+Added Pin To Net: NetName=NetQ13_1 Pin=R124-2
+Added Net: Name=NetQ13_1
+Added Member To Class: ClassName=Motor Member=Component Q2 2N3906S-RTK/PS
+Added Member To Class: ClassName=LED Member=Component Q4 2N3906S-RTK/PS
+Added Member To Class: ClassName=LED Member=Component Q5 2N3906S-RTK/PS
+Added Member To Class: ClassName=LED Member=Component Q6 2N3906S-RTK/PS
+Added Member To Class: ClassName=Temp Member=Component Q7 2N3906S-RTK/PS
+Added Member To Class: ClassName=LED Member=Component Q9 2N3906S-RTK/PS
+Added Member To Class: ClassName=LED Member=Component Q10 2N3906S-RTK/PS
+Added Member To Class: ClassName=LED Member=Component R3 1.5k次
+Added Member To Class: ClassName=LED Member=Component R4 1.5k次
+Added Member To Class: ClassName=LED Member=Component R5 1.5k次
+Added Member To Class: ClassName=LED Member=Component R6 10k次
+Added Member To Class: ClassName=LED Member=Component R9 1k次
+Added Member To Class: ClassName=LED Member=Component R10 1k次
+Added Member To Class: ClassName=LED Member=Component R11 1k次
+Added Member To Class: ClassName=LED Member=Component R12 1.5k次
+Added Member To Class: ClassName=LED Member=Component R13 1.5k次
+Added Member To Class: ClassName=LED Member=Component R16 1k次
+Added Member To Class: ClassName=LED Member=Component R17 1k次
+Added Member To Class: ClassName=LED Member=Component R19 10k次
+Added Member To Class: ClassName=LED Member=Component R20 10k次
+Added Member To Class: ClassName=LED Member=Component R21 10k次
+Added Member To Class: ClassName=LED Member=Component R22 10k次
+Added Member To Class: ClassName=Motor Member=Component R124 NC
+Added Member To Class: ClassName=Temp Member=Component R124 NC
+Added Member To Class: ClassName=LED Member=Component XH1 LED

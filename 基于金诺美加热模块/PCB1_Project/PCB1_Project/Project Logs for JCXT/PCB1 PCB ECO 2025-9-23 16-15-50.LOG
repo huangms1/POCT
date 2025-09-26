@@ -1,0 +1,60 @@
+Removed Pin From Net: NetName=GND Pin=Q8-2
+Removed Pin From Net: NetName=NetQ3_1 Pin=Q8-3
+Removed Pin From Net: NetName=VCC_5V Pin=R27-1
+Removed Pin From Net: NetName=NetQ3_1 Pin=R27-2
+Removed Pin From Net: NetName=VCC_3V3 Pin=R29-1
+Removed Pin From Net: NetName=JNM_GDDL Pin=R29-2
+Removed Pin From Net: NetName=JNM_GDDL Pin=R30-1
+Removed Pin From Net: NetName=GND Pin=R33-1
+Removed Member From Class: ClassName=Power Member=R27
+Removed Member From Class: ClassName=Power Member=R29
+Removed Member From Class: ClassName=Power Member=R30
+Removed Member From Class: ClassName=Power Member=R33
+Added Component: Designator=Q8(SOT-23-3_L2.9-W1.3-P1.90-LS2.4-TR)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "Add into BOM"; Value = "yes"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Collector - Emitter Voltage VCEO"; Value = "40V"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Convert to PCB"; Value = "yes"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Current - Collector(Ic)"; Value = "200mA"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Current - Collector Cutoff"; Value = "50nA"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Datasheet"; Value = "https://item.szlcsc.com/datasheet/2N3906S-RTK%252FPS/6051230.html"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "DC Current Gain"; Value = "300@10mA,1V"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Device"; Value = "2N3906S-RTK/PS"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Emitter-Base Voltage(Vebo)"; Value = "5V"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "JLCPCB Part Class"; Value = "Extended Part"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "LCSC Part Name"; Value = "2N3906S-RTK/PS"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer"; Value = "KEC"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer Part"; Value = "2N3906S-RTK/PS"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Pd - Power Dissipation"; Value = "350mW"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Supplier"; Value = "LCSC"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Supplier Footprint"; Value = "SOT-23"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Supplier Part"; Value = "C5300004"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Symbol"; Value = "2N3906S-RTK/PS_C5300004"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Transition frequency(fT)"; Value = "250MHz"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Vce Saturation(VCE(sat))"; Value = "400mV@50mA,5mA"; VariantName = "[No Variations]"
+Added Component: Designator=R7(R0603)
+Add component. Clean all parameters for all variants
+Added Component: Designator=R8(R0603)
+Add component. Clean all parameters for all variants
+Added Component: Designator=R14(R0603)
+Add component. Clean all parameters for all variants
+Added Component: Designator=R15(R0603)
+Add component. Clean all parameters for all variants
+Added Pin To Net: NetName=VCC_5V Pin=Q8-1
+Added Pin To Net: NetName=VCC_5V Pin=R7-1
+Added Pin To Net: NetName=JNM_GDDL Pin=R8-1
+Added Pin To Net: NetName=NetQ3_1 Pin=R14-2
+Added Pin To Net: NetName=GND Pin=R15-2
+Added Pin To Net: NetName=JNM_GDDL Pin=U38-88
+Added Pin To Net: NetName=NetQ8_2 Pin=Q8-2
+Added Pin To Net: NetName=NetQ8_2 Pin=R7-2
+Added Pin To Net: NetName=NetQ8_2 Pin=R8-2
+Added Net: Name=NetQ8_2
+Added Pin To Net: NetName=NetQ8_3 Pin=Q8-3
+Added Pin To Net: NetName=NetQ8_3 Pin=R14-1
+Added Pin To Net: NetName=NetQ8_3 Pin=R15-1
+Added Net: Name=NetQ8_3
+Added Member To Class: ClassName=Power Member=Component R7 10k¦¸
+Added Member To Class: ClassName=Power Member=Component R8 1k¦¸
+Added Member To Class: ClassName=Power Member=Component R14 NC
+Added Member To Class: ClassName=Power Member=Component R15 10k¦¸
